@@ -1,0 +1,551 @@
+"","instnm","pub_status","conference","year","win_pct_diff","year2","applcn_pct_chng"
+"1","Arizona State","Public","Pac 12",2002,20.8,2003,9
+"2","Auburn","Public","SEC",2002,5.6,2003,-6.2
+"3","Baylor","Private","Big 12",2002,-2.3,2003,20.2
+"4","Clemson","Public","ACC",2002,-0.7,2003,0.9
+"5","Duke","Private","ACC",2002,16.7,2003,16.7
+"6","Florida State","Public","ACC",2002,0.6,2003,22.3
+"7","Georgia Tech","Public","ACC",2002,-4.5,2003,-4.2
+"8","Indiana","Public","Big 10",2002,-20.5,2003,4.3
+"9","Iowa State","Public","Big 12",2002,-13.6,2003,-12.9
+"10","Kansas State","Public","Big 12",2002,30.1,2003,-3.2
+"11","LSU","Public","SEC",2002,-13.5,2003,-1.5
+"12","Michigan State","Public","Big 10",2002,-21.2,2003,-0.9
+"13","Mississippi State","Public","SEC",2002,-2.3,2003,-2.6
+"14","North Carolina State","Public","ACC",2002,14.9,2003,3.1
+"15","Northwestern","Private","Big 10",2002,-11.4,2003,2.1
+"16","Ohio State","Public","Big 10",2002,36.4,2003,2.9
+"17","Oklahoma State","Public","Big 12",2002,25.2,2003,29.8
+"18","Oregon State","Public","Pac 12",2002,16.1,2003,-12.6
+"19","Penn State","Public","Big 10",2002,23.8,2003,-1.8
+"20","Purdue","Public","Big 10",2002,-0.7,2003,0.5
+"21","Stanford","Private","Pac 12",2002,-63.6,2003,0.2
+"22","Texas Tech","Public","Big 12",2002,0.6,2003,5
+"23","Alabama","Public","SEC",2002,22.4,2003,13.3
+"24","Tennessee","Public","SEC",2002,-21.8,2003,1.8
+"25","Texas","Public","Big 12",2002,1.3,2003,10.6
+"26","Arizona","Public","Pac 12",2002,-12.1,2003,6.8
+"27","Arkansas","Public","SEC",2002,0.6,2003,9.4
+"28","California","Public","Pac 12",2002,49.2,2003,1
+"29","UCLA","Public","Pac 12",2002,-2.1,2003,6.6
+"30","Florida","Public","SEC",2002,-20.3,2003,14.2
+"31","Georgia","Public","SEC",2002,20.1,2003,-7.6
+"32","Illinois","Public","Big 10",2002,-49.2,2003,7.8
+"33","Iowa","Public","Big 10",2002,30.1,2003,2
+"34","Kansas","Public","Big 12",2002,-10.6,2003,6.3
+"35","Kentucky","Public","SEC",2002,40.2,2003,5.1
+"36","Maryland","Public","ACC",2002,-12.3,2003,8.3
+"37","Michigan","Public","Big 10",2002,4.2,2003,3.3
+"38","Minnesota","Public","Big 10",2002,25.2,2003,16.7
+"39","Mississippi","Public","SEC",2002,-9.8,2003,0
+"40","North Carolina","Public","ACC",2002,-33.3,2003,7.5
+"41","Oklahoma","Public","Big 12",2002,2.4,2003,12.3
+"42","Oregon","Public","Pac 12",2002,-37.1,2003,13.8
+"43","South Carolina","Public","SEC",2002,-31.1,2003,7.5
+"44","Southern California","Private","Pac 12",2002,30.1,2003,3.2
+"45","Virginia","Public","ACC",2002,22.6,2003,2.1
+"46","Washington","Public","Pac 12",2002,-18.9,2003,0.9
+"47","Wisconsin","Public","Big 10",2002,15.5,2003,2.5
+"48","Vanderbilt","Private","SEC",2002,-1.5,2003,0
+"49","Wake Forest","Private","ACC",2002,-0.7,2003,-4.1
+"50","Washington State","Public","Pac 12",2002,-4.9,2003,3.1
+"51","Arizona State","Public","Pac 12",2003,-15.5,2004,5.1
+"52","Auburn","Public","SEC",2003,-7.7,2004,3.1
+"53","Baylor","Private","Big 12",2003,0,2004,22.2
+"54","Clemson","Public","ACC",2003,15.4,2004,-7
+"55","Duke","Private","ACC",2003,16.7,2004,8.8
+"56","Florida State","Public","ACC",2003,12.6,2004,-1.4
+"57","Georgia Tech","Public","ACC",2003,0,2004,-0.1
+"58","Indiana","Public","Big 10",2003,-8.3,2004,-4.5
+"59","Iowa State","Public","Big 12",2003,-33.3,2004,1.5
+"60","Kansas State","Public","Big 12",2003,-11.3,2004,26.6
+"61","LSU","Public","SEC",2003,31.3,2004,-2.2
+"62","Michigan State","Public","Big 10",2003,28.2,2004,-12.6
+"63","Mississippi State","Public","SEC",2003,-8.3,2004,12.9
+"64","North Carolina State","Public","ACC",2003,-17,2004,5.6
+"65","Northwestern","Private","Big 10",2003,21.2,2004,-1
+"66","Ohio State","Public","Big 10",2003,-15.4,2004,-15.7
+"67","Oklahoma State","Public","Big 12",2003,7.7,2004,-1.1
+"68","Oregon State","Public","Pac 12",2003,0,2004,27.5
+"69","Penn State","Public","Big 10",2003,-44.2,2004,13.3
+"70","Purdue","Public","Big 10",2003,15.4,2004,4.5
+"71","Stanford","Private","Pac 12",2003,18.2,2004,2.9
+"72","Texas Tech","Public","Big 12",2003,-2.7,2004,-3.1
+"73","Alabama","Public","SEC",2003,-46.2,2004,9.7
+"74","Tennessee","Public","SEC",2003,15.4,2004,13.9
+"75","Texas","Public","Big 12",2003,-7.7,2004,-6.2
+"76","Arizona","Public","Pac 12",2003,-16.7,2004,12
+"77","Arkansas","Public","SEC",2003,4.9,2004,6
+"78","California","Public","Pac 12",2003,-1.2,2004,1.5
+"79","UCLA","Public","Pac 12",2003,-15.4,2004,3.6
+"80","Florida","Public","SEC",2003,0,2004,-2.2
+"81","Georgia","Public","SEC",2003,-14.3,2004,0
+"82","Illinois","Public","Big 10",2003,-33.3,2004,3.7
+"83","Iowa","Public","Big 10",2003,-7.7,2004,4
+"84","Kansas","Public","Big 12",2003,29.5,2004,1.3
+"85","Kentucky","Public","SEC",2003,-25,2004,6.1
+"86","Maryland","Public","ACC",2003,-1.6,2004,-10.9
+"87","Michigan","Public","Big 10",2003,0,2004,-17.9
+"88","Minnesota","Public","Big 10",2003,15.4,2004,7.9
+"89","Mississippi","Public","SEC",2003,23.1,2004,-14.6
+"90","North Carolina","Public","ACC",2003,-8.3,2004,2.6
+"91","Oklahoma","Public","Big 12",2003,0,2004,0.3
+"92","Oregon","Public","Pac 12",2003,7.7,2004,3.1
+"93","South Carolina","Public","SEC",2003,0,2004,-0.1
+"94","Southern California","Private","Pac 12",2003,7.7,2004,1.8
+"95","Virginia","Public","ACC",2003,-2.7,2004,1.3
+"96","Washington","Public","Pac 12",2003,-3.8,2004,0
+"97","Wisconsin","Public","Big 10",2003,-3.3,2004,-2
+"98","Vanderbilt","Private","SEC",2003,0,2004,13.6
+"99","Wake Forest","Private","ACC",2003,-12.2,2004,9.3
+"100","Washington State","Public","Pac 12",2003,0,2004,2.7
+"101","Arizona State","Public","Pac 12",2004,33.3,2005,-4.2
+"102","Auburn","Public","SEC",2004,38.5,2005,11.1
+"103","Baylor","Private","Big 12",2004,2.3,2005,41.8
+"104","Clemson","Public","ACC",2004,-14.7,2005,0
+"105","Duke","Private","ACC",2004,-15.2,2005,1.9
+"106","Florida State","Public","ACC",2004,-1.9,2005,1.5
+"107","Georgia Tech","Public","ACC",2004,4.5,2005,7
+"108","Indiana","Public","Big 10",2004,10.6,2005,3.8
+"109","Iowa State","Public","Big 12",2004,41.7,2005,-0.8
+"110","Kansas State","Public","Big 12",2004,-37,2005,0
+"111","LSU","Public","SEC",2004,-17.9,2005,9.2
+"112","Michigan State","Public","Big 10",2004,-19.9,2005,0
+"113","Mississippi State","Public","SEC",2004,10.6,2005,10.2
+"114","North Carolina State","Public","ACC",2004,-16.1,2005,8.7
+"115","Northwestern","Private","Big 10",2004,3.8,2005,10.6
+"116","Ohio State","Public","Big 10",2004,-17.9,2005,4
+"117","Oklahoma State","Public","Big 12",2004,-10.9,2005,-1.5
+"118","Oregon State","Public","Pac 12",2004,-3.2,2005,-6.7
+"119","Penn State","Public","Big 10",2004,11.4,2005,-3.7
+"120","Purdue","Public","Big 10",2004,-10.9,2005,0.2
+"121","Stanford","Private","Pac 12",2004,0,2005,5.3
+"122","Texas Tech","Public","Big 12",2004,5.1,2005,-5.6
+"123","Alabama","Public","SEC",2004,19.2,2005,15.9
+"124","Tennessee","Public","SEC",2004,0,2005,0
+"125","Texas","Public","Big 12",2004,14.7,2005,4
+"126","Arizona","Public","Pac 12",2004,10.6,2005,-24.5
+"127","Arkansas","Public","SEC",2004,-23.8,2005,3.8
+"128","California","Public","Pac 12",2004,26.2,2005,-0.9
+"129","UCLA","Public","Pac 12",2004,3.8,2005,-3.8
+"130","Florida","Public","SEC",2004,-3.2,2005,-5.8
+"131","Georgia","Public","SEC",2004,4.8,2005,12.3
+"132","Illinois","Public","Big 10",2004,18.9,2005,-1.3
+"133","Iowa","Public","Big 10",2004,6.4,2005,-4.6
+"134","Kansas","Public","Big 12",2004,-9.8,2005,7.6
+"135","Kentucky","Public","SEC",2004,-15.2,2005,12.6
+"136","Maryland","Public","ACC",2004,-31.5,2005,0.6
+"137","Michigan","Public","Big 10",2004,-1.9,2005,12.2
+"138","Minnesota","Public","Big 10",2004,-18.6,2005,11
+"139","Mississippi","Public","SEC",2004,-40.6,2005,2.7
+"140","North Carolina","Public","ACC",2004,33.3,2005,7.2
+"141","Oklahoma","Public","Big 12",2004,6.6,2005,-9.6
+"142","Oregon","Public","Pac 12",2004,-16.1,2005,-5.6
+"143","South Carolina","Public","SEC",2004,12.9,2005,3.1
+"144","Southern California","Private","Pac 12",2004,7.7,2005,6.2
+"145","Virginia","Public","ACC",2004,5.1,2005,5.6
+"146","Washington","Public","Pac 12",2004,-40.9,2005,1.2
+"147","Wisconsin","Public","Big 10",2004,21.2,2005,-0.4
+"148","Vanderbilt","Private","SEC",2004,1.5,2005,4.4
+"149","Wake Forest","Private","ACC",2004,-5.3,2005,0
+"150","Washington State","Public","Pac 12",2004,-31.5,2005,-2.9
+"151","Arizona State","Public","Pac 12",2005,-16.7,2006,4
+"152","Auburn","Public","SEC",2005,-25,2006,11.7
+"153","Baylor","Private","Big 12",2005,18.2,2006,38.2
+"154","Clemson","Public","ACC",2005,12.1,2006,20.4
+"155","Duke","Private","ACC",2005,-9.1,2006,-7
+"156","Florida State","Public","ACC",2005,-13.5,2006,5.5
+"157","Georgia Tech","Public","ACC",2005,0,2006,0.9
+"158","Indiana","Public","Big 10",2005,9.1,2006,21.3
+"159","Iowa State","Public","Big 12",2005,0,2006,0
+"160","Kansas State","Public","Big 12",2005,9.1,2006,-1.3
+"161","LSU","Public","SEC",2005,9.6,2006,-2.3
+"162","Michigan State","Public","Big 10",2005,3.8,2006,6.4
+"163","Mississippi State","Public","SEC",2005,0,2006,0
+"164","North Carolina State","Public","ACC",2005,12.9,2006,-2.5
+"165","Northwestern","Private","Big 10",2005,8.3,2006,3.6
+"166","Ohio State","Public","Big 10",2005,16.7,2006,7.9
+"167","Oklahoma State","Public","Big 12",2005,-22,2006,3
+"168","Oregon State","Public","Pac 12",2005,-12.9,2006,-5.3
+"169","Penn State","Public","Big 10",2005,55.3,2006,-0.7
+"170","Purdue","Public","Big 10",2005,-12.9,2006,3.5
+"171","Stanford","Private","Pac 12",2005,9.1,2006,10.6
+"172","Texas Tech","Public","Big 12",2005,8.3,2006,9.7
+"173","Alabama","Public","SEC",2005,33.3,2006,18.6
+"174","Tennessee","Public","SEC",2005,-31.5,2006,13.1
+"175","Texas","Public","Big 12",2005,8.3,2006,14.2
+"176","Arizona","Public","Pac 12",2005,0,2006,-7.2
+"177","Arkansas","Public","SEC",2005,-9.1,2006,39.8
+"178","California","Public","Pac 12",2005,-19.7,2006,0.9
+"179","UCLA","Public","Pac 12",2005,33.3,2006,-2.4
+"180","Florida","Public","SEC",2005,16.7,2006,4.5
+"181","Georgia","Public","SEC",2005,-6.4,2006,-7.1
+"182","Illinois","Public","Big 10",2005,-9.1,2006,-13.6
+"183","Iowa","Public","Big 10",2005,-25,2006,8.4
+"184","Kansas","Public","Big 12",2005,22,2006,-3.9
+"185","Kentucky","Public","SEC",2005,9.1,2006,-0.8
+"186","Maryland","Public","ACC",2005,0,2006,5
+"187","Michigan","Public","Big 10",2005,-16.7,2006,8.1
+"188","Minnesota","Public","Big 10",2005,0,2006,19.9
+"189","Mississippi","Public","SEC",2005,-9.1,2006,1.5
+"190","North Carolina","Public","ACC",2005,-4.5,2006,-2.3
+"191","Oklahoma","Public","Big 12",2005,-25.6,2006,11.4
+"192","Oregon","Public","Pac 12",2005,45.5,2006,4
+"193","South Carolina","Public","SEC",2005,3.8,2006,5.2
+"194","Southern California","Private","Pac 12",2005,-7.7,2006,7.4
+"195","Virginia","Public","ACC",2005,-8.3,2006,2.7
+"196","Washington","Public","Pac 12",2005,9.1,2006,-0.2
+"197","Wisconsin","Public","Big 10",2005,1.9,2006,4.6
+"198","Vanderbilt","Private","SEC",2005,27.3,2006,0
+"199","Wake Forest","Private","ACC",2005,0,2006,16.7
+"200","Washington State","Public","Pac 12",2005,-9.1,2006,1.3
+"201","Arizona State","Public","Pac 12",2006,-4.5,2007,0
+"202","Auburn","Public","SEC",2006,9.6,2007,11.1
+"203","Baylor","Private","Big 12",2006,-12.1,2007,23.9
+"204","Clemson","Public","ACC",2006,-5.1,2007,0
+"205","Duke","Private","ACC",2006,-9.1,2007,8
+"206","Florida State","Public","ACC",2006,-7.7,2007,2.8
+"207","Georgia Tech","Public","ACC",2006,6,2007,0.1
+"208","Indiana","Public","Big 10",2006,5.3,2007,9.1
+"209","Iowa State","Public","Big 12",2006,-25,2007,5.9
+"210","Kansas State","Public","Big 12",2006,8.4,2007,-24.7
+"211","LSU","Public","SEC",2006,0,2007,-6.4
+"212","Michigan State","Public","Big 10",2006,-12.1,2007,5.1
+"213","Mississippi State","Public","SEC",2006,-2.3,2007,5.5
+"214","North Carolina State","Public","ACC",2006,-33.3,2007,13.7
+"215","Northwestern","Private","Big 10",2006,-25,2007,13.5
+"216","Ohio State","Public","Big 10",2006,9,2007,13
+"217","Oklahoma State","Public","Big 12",2006,17.5,2007,-4.7
+"218","Oregon State","Public","Pac 12",2006,26,2007,38.5
+"219","Penn State","Public","Big 10",2006,-22.4,2007,16.4
+"220","Purdue","Public","Big 10",2006,11.7,2007,4.2
+"221","Stanford","Private","Pac 12",2006,-37.1,2007,7.3
+"222","Texas Tech","Public","Big 12",2006,-13.5,2007,-13.4
+"223","Alabama","Public","SEC",2006,-37.2,2007,14.3
+"224","Tennessee","Public","SEC",2006,23.8,2007,2.9
+"225","Texas","Public","Big 12",2006,-23.1,2007,-0.3
+"226","Arizona","Public","Pac 12",2006,22.7,2007,53.2
+"227","Arkansas","Public","SEC",2006,35.1,2007,20
+"228","California","Public","Pac 12",2006,13.3,2007,12.9
+"229","UCLA","Public","Pac 12",2006,-29.5,2007,12.1
+"230","Florida","Public","SEC",2006,17.9,2007,9.2
+"231","Georgia","Public","SEC",2006,-7.7,2007,29.2
+"232","Illinois","Public","Big 10",2006,-1.5,2007,14
+"233","Iowa","Public","Big 10",2006,-12.2,2007,2.3
+"234","Kansas","Public","Big 12",2006,-8.3,2007,2.1
+"235","Kentucky","Public","SEC",2006,34.3,2007,-4.7
+"236","Maryland","Public","ACC",2006,23.8,2007,2.7
+"237","Michigan","Public","Big 10",2006,26.3,2007,6.5
+"238","Minnesota","Public","Big 10",2006,-12.2,2007,5.8
+"239","Mississippi","Public","SEC",2006,6.1,2007,17.1
+"240","North Carolina","Public","ACC",2006,-20.5,2007,7.1
+"241","Oklahoma","Public","Big 12",2006,11.9,2007,14.7
+"242","Oregon","Public","Pac 12",2006,-37.1,2007,8.1
+"243","South Carolina","Public","SEC",2006,3.2,2007,7.1
+"244","Southern California","Private","Pac 12",2006,-7.7,2007,-0.6
+"245","Virginia","Public","ACC",2006,-16.7,2007,10.6
+"246","Washington","Public","Pac 12",2006,23.5,2007,11.8
+"247","Wisconsin","Public","Big 10",2006,15.4,2007,1.4
+"248","Vanderbilt","Private","SEC",2006,-12.1,2007,10.7
+"249","Wake Forest","Private","ACC",2006,42.2,2007,-2.2
+"250","Washington State","Public","Pac 12",2006,13.6,2007,16.5
+"251","Arizona State","Public","Pac 12",2007,23.1,2008,20.4
+"252","Auburn","Public","SEC",2007,-15.4,2008,-3.5
+"253","Baylor","Private","Big 12",2007,-8.3,2008,-3.8
+"254","Clemson","Public","ACC",2007,7.7,2008,11.5
+"255","Duke","Private","ACC",2007,8.3,2008,-2.3
+"256","Florida State","Public","ACC",2007,0,2008,4.7
+"257","Georgia Tech","Public","ACC",2007,-10.4,2008,4.4
+"258","Indiana","Public","Big 10",2007,12.2,2008,7.3
+"259","Iowa State","Public","Big 12",2007,-8.3,2008,14.8
+"260","Kansas State","Public","Big 12",2007,-12.2,2008,25.5
+"261","LSU","Public","SEC",2007,1.1,2008,13
+"262","Michigan State","Public","Big 10",2007,20.5,2008,4.7
+"263","Mississippi State","Public","SEC",2007,36.5,2008,22.6
+"264","North Carolina State","Public","ACC",2007,16.7,2008,5.8
+"265","Northwestern","Private","Big 10",2007,16.7,2008,19.3
+"266","Ohio State","Public","Big 10",2007,-7.7,2008,-2.7
+"267","Oklahoma State","Public","Big 12",2007,0,2008,-0.1
+"268","Oregon State","Public","Pac 12",2007,-2.2,2008,-10.2
+"269","Penn State","Public","Big 10",2007,0,2008,13.6
+"270","Purdue","Public","Big 10",2007,4.4,2008,15.5
+"271","Stanford","Private","Pac 12",2007,25,2008,5.6
+"272","Texas Tech","Public","Big 12",2007,7.7,2008,35
+"273","Alabama","Public","SEC",2007,7.7,2008,29.3
+"274","Tennessee","Public","SEC",2007,2.2,2008,1.7
+"275","Texas","Public","Big 12",2007,0,2008,8.3
+"276","Arizona","Public","Pac 12",2007,-8.3,2008,-11.4
+"277","Arkansas","Public","SEC",2007,-9.9,2008,18.8
+"278","California","Public","Pac 12",2007,-23.1,2008,5.6
+"279","UCLA","Public","Pac 12",2007,-7.7,2008,7.2
+"280","Florida","Public","SEC",2007,-23.6,2008,9.1
+"281","Georgia","Public","SEC",2007,15.4,2008,5.9
+"282","Illinois","Public","Big 10",2007,52.6,2008,7.4
+"283","Iowa","Public","Big 10",2007,3.8,2008,6.2
+"284","Kansas","Public","Big 12",2007,42.3,2008,1.2
+"285","Kentucky","Public","SEC",2007,0,2008,5.9
+"286","Maryland","Public","ACC",2007,-23.1,2008,16.1
+"287","Michigan","Public","Big 10",2007,-15.4,2008,8.5
+"288","Minnesota","Public","Big 10",2007,-37.8,2008,11.8
+"289","Mississippi","Public","SEC",2007,-8.3,2008,0.3
+"290","North Carolina","Public","ACC",2007,8.3,2008,1.8
+"291","Oklahoma","Public","Big 12",2007,0,2008,15.2
+"292","Oregon","Public","Pac 12",2007,15.4,2008,4.3
+"293","South Carolina","Public","SEC",2007,-11.5,2008,7.5
+"294","Southern California","Private","Pac 12",2007,0,2008,6.3
+"295","Virginia","Public","ACC",2007,27.6,2008,3.2
+"296","Washington","Public","Pac 12",2007,-10.9,2008,11.8
+"297","Wisconsin","Public","Big 10",2007,-23.1,2008,9.1
+"298","Vanderbilt","Private","SEC",2007,8.3,2008,31.2
+"299","Wake Forest","Private","ACC",2007,-9.3,2008,26.1
+"300","Washington State","Public","Pac 12",2007,-8.3,2008,4.4
+"301","Arizona State","Public","Pac 12",2008,-35.3,2009,8.7
+"302","Auburn","Public","SEC",2008,-27.6,2009,-12.9
+"303","Baylor","Private","Big 12",2008,8.3,2009,23.3
+"304","Clemson","Public","ACC",2008,-15.4,2009,1.7
+"305","Duke","Private","ACC",2008,25,2009,5.8
+"306","Florida State","Public","ACC",2008,15.4,2009,-8
+"307","Georgia Tech","Public","ACC",2008,15.4,2009,6.1
+"308","Indiana","Public","Big 10",2008,-28.8,2009,5.9
+"309","Iowa State","Public","Big 12",2008,-8.3,2009,13.5
+"310","Kansas State","Public","Big 12",2008,0,2009,-10.4
+"311","LSU","Public","SEC",2008,-24.2,2009,31.8
+"312","Michigan State","Public","Big 10",2008,15.4,2009,-0.8
+"313","Mississippi State","Public","SEC",2008,-28.2,2009,50.8
+"314","North Carolina State","Public","ACC",2008,4.5,2009,7.9
+"315","Northwestern","Private","Big 10",2008,19.2,2009,14.1
+"316","Ohio State","Public","Big 10",2008,-7.7,2009,1.9
+"317","Oklahoma State","Public","Big 12",2008,15.4,2009,18
+"318","Oregon State","Public","Pac 12",2008,0,2009,6
+"319","Penn State","Public","Big 10",2008,15.4,2009,-1.2
+"320","Purdue","Public","Big 10",2008,-28.2,2009,-9.1
+"321","Stanford","Private","Pac 12",2008,8.3,2009,20.3
+"322","Texas Tech","Public","Big 12",2008,15.4,2009,2.5
+"323","Alabama","Public","SEC",2008,31.9,2009,2.5
+"324","Tennessee","Public","SEC",2008,-29.8,2009,-4.6
+"325","Texas","Public","Big 12",2008,15.4,2009,6.3
+"326","Arizona","Public","Pac 12",2008,19.9,2009,9.8
+"327","Arkansas","Public","SEC",2008,-19.9,2009,-0.1
+"328","California","Public","Pac 12",2008,15.4,2009,9.8
+"329","UCLA","Public","Pac 12",2008,-12.8,2009,9.2
+"330","Florida","Public","SEC",2008,23.6,2009,-2
+"331","Georgia","Public","SEC",2008,-7.7,2009,2
+"332","Illinois","Public","Big 10",2008,-27.6,2009,12.1
+"333","Iowa","Public","Big 10",2008,19.2,2009,-3.4
+"334","Kansas","Public","Big 12",2008,-30.8,2009,5.2
+"335","Kentucky","Public","SEC",2008,-7.7,2009,4.7
+"336","Maryland","Public","ACC",2008,15.4,2009,1
+"337","Michigan","Public","Big 10",2008,-44.2,2009,0.5
+"338","Minnesota","Public","Big 10",2008,45.5,2009,16.2
+"339","Mississippi","Public","SEC",2008,44.2,2009,8.2
+"340","North Carolina","Public","ACC",2008,28.2,2009,7.2
+"341","Oklahoma","Public","Big 12",2008,7.1,2009,-14.8
+"342","Oregon","Public","Pac 12",2008,7.7,2009,33
+"343","South Carolina","Public","SEC",2008,3.8,2009,13.5
+"344","Southern California","Private","Pac 12",2008,7.7,2009,-0.4
+"345","Virginia","Public","ACC",2008,-27.6,2009,15
+"346","Washington","Public","Pac 12",2008,-30.8,2009,1.6
+"347","Wisconsin","Public","Big 10",2008,-15.4,2009,1.5
+"348","Vanderbilt","Private","SEC",2008,12.2,2009,14.2
+"349","Wake Forest","Private","ACC",2008,-7.7,2009,16.6
+"350","Washington State","Public","Pac 12",2008,-26.3,2009,4.1
+"351","Arizona State","Public","Pac 12",2009,-8.3,2010,4.5
+"352","Auburn","Public","SEC",2009,19.9,2010,6.2
+"353","Baylor","Private","Big 12",2009,0,2010,8.6
+"354","Clemson","Public","ACC",2009,10.4,2010,12.3
+"355","Duke","Private","ACC",2009,8.3,2010,18.7
+"356","Florida State","Public","ACC",2009,-15.4,2010,11.1
+"357","Georgia Tech","Public","ACC",2009,9.3,2010,11.4
+"358","Indiana","Public","Big 10",2009,8.3,2010,11.2
+"359","Iowa State","Public","Big 12",2009,37.2,2010,-0.1
+"360","Kansas State","Public","Big 12",2009,8.3,2010,-1.7
+"361","LSU","Public","SEC",2009,7.7,2010,5.5
+"362","Michigan State","Public","Big 10",2009,-23.1,2010,6
+"363","Mississippi State","Public","SEC",2009,8.3,2010,-17.6
+"364","North Carolina State","Public","ACC",2009,-4.5,2010,6.4
+"365","Northwestern","Private","Big 10",2009,-7.7,2010,1.4
+"366","Ohio State","Public","Big 10",2009,7.7,2010,25.5
+"367","Oklahoma State","Public","Big 12",2009,0,2010,15
+"368","Oregon State","Public","Pac 12",2009,-7.7,2010,16.5
+"369","Penn State","Public","Big 10",2009,0,2010,4.2
+"370","Purdue","Public","Big 10",2009,8.3,2010,12.8
+"371","Stanford","Private","Pac 12",2009,19.9,2010,5.2
+"372","Texas Tech","Public","Big 12",2009,-15.4,2010,-1.2
+"373","Alabama","Public","SEC",2009,14.3,2010,6
+"374","Tennessee","Public","SEC",2009,12.2,2010,2.6
+"375","Texas","Public","Big 12",2009,0.5,2010,-1.1
+"376","Arizona","Public","Pac 12",2009,0,2010,7.6
+"377","Arkansas","Public","SEC",2009,19.9,2010,16.5
+"378","California","Public","Pac 12",2009,-7.7,2010,0.4
+"379","UCLA","Public","Pac 12",2009,20.5,2010,0.5
+"380","Florida","Public","SEC",2009,0,2010,2.8
+"381","Georgia","Public","SEC",2009,-15.4,2010,3.3
+"382","Illinois","Public","Big 10",2009,-16.7,2010,4.8
+"383","Iowa","Public","Big 10",2009,15.4,2010,14.3
+"384","Kansas","Public","Big 12",2009,-19.9,2010,-2.3
+"385","Kentucky","Public","SEC",2009,0,2010,9.7
+"386","Maryland","Public","ACC",2009,-44.9,2010,-7.7
+"387","Michigan","Public","Big 10",2009,16.7,2010,5.5
+"388","Minnesota","Public","Big 10",2009,-7.7,2010,8.7
+"389","Mississippi","Public","SEC",2009,0,2010,26.9
+"390","North Carolina","Public","ACC",2009,0,2010,7.8
+"391","Oklahoma","Public","Big 12",2009,-24.2,2010,8
+"392","Oregon","Public","Pac 12",2009,0,2010,11.8
+"393","South Carolina","Public","SEC",2009,0,2010,4
+"394","Southern California","Private","Pac 12",2009,-23.1,2010,0.1
+"395","Virginia","Public","ACC",2009,-16.7,2010,4.8
+"396","Washington","Public","Pac 12",2009,41.7,2010,5.2
+"397","Wisconsin","Public","Big 10",2009,23.1,2010,-5.4
+"398","Vanderbilt","Private","SEC",2009,-37.2,2010,12.7
+"399","Wake Forest","Private","ACC",2009,-19.9,2010,0.1
+"400","Washington State","Public","Pac 12",2009,-7.1,2010,-1.6
+"401","Arizona State","Public","Pac 12",2010,16.7,2011,5.2
+"402","Auburn","Public","SEC",2010,38.5,2011,16.1
+"403","Baylor","Private","Big 12",2010,20.5,2011,14.1
+"404","Clemson","Public","ACC",2010,-18.1,2011,3.6
+"405","Duke","Private","ACC",2010,-14.4,2011,14.3
+"406","Florida State","Public","ACC",2010,15.4,2011,8.7
+"407","Georgia Tech","Public","ACC",2010,-32.4,2011,18
+"408","Indiana","Public","Big 10",2010,8.3,2011,-4.1
+"409","Iowa State","Public","Big 12",2010,-12.2,2011,20.2
+"410","Kansas State","Public","Big 12",2010,3.8,2011,0.3
+"411","LSU","Public","SEC",2010,15.4,2011,14.4
+"412","Michigan State","Public","Big 10",2010,38.5,2011,5.6
+"413","Mississippi State","Public","SEC",2010,27.6,2011,6
+"414","North Carolina State","Public","ACC",2010,27.6,2011,4
+"415","Northwestern","Private","Big 10",2010,-7.7,2011,8.5
+"416","Ohio State","Public","Big 10",2010,7.7,2011,-2.5
+"417","Oklahoma State","Public","Big 12",2010,15.4,2011,14
+"418","Oregon State","Public","Pac 12",2010,-19.9,2011,13.5
+"419","Penn State","Public","Big 10",2010,-30.8,2011,2
+"420","Purdue","Public","Big 10",2010,-8.3,2011,-3.2
+"421","Stanford","Private","Pac 12",2010,30.8,2011,7.3
+"422","Texas Tech","Public","Big 12",2010,-7.7,2011,7.5
+"423","Alabama","Public","SEC",2010,-23.1,2011,10.1
+"424","Tennessee","Public","SEC",2010,-7.7,2011,9.7
+"425","Texas","Public","Big 12",2010,-51.2,2011,5.1
+"426","Arizona","Public","Pac 12",2010,-7.7,2011,0
+"427","Arkansas","Public","SEC",2010,15.4,2011,18.6
+"428","California","Public","Pac 12",2010,-19.9,2011,3.5
+"429","UCLA","Public","Pac 12",2010,-20.5,2011,10.5
+"430","Florida","Public","SEC",2010,-31.3,2011,3
+"431","Georgia","Public","SEC",2010,-15.4,2011,-2.1
+"432","Illinois","Public","Big 10",2010,28.8,2011,5.3
+"433","Iowa","Public","Big 10",2010,-23.1,2011,10
+"434","Kansas","Public","Big 12",2010,-16.7,2011,-4.7
+"435","Kentucky","Public","SEC",2010,-7.7,2011,11
+"436","Maryland","Public","ACC",2010,52.6,2011,0.9
+"437","Michigan","Public","Big 10",2010,12.2,2011,25.2
+"438","Minnesota","Public","Big 10",2010,-21.2,2011,7.8
+"439","Mississippi","Public","SEC",2010,-35.9,2011,22.1
+"440","North Carolina","Public","ACC",2010,0,2011,-4
+"441","Oklahoma","Public","Big 12",2010,24.2,2011,14.6
+"442","Oregon","Public","Pac 12",2010,15.4,2011,10.3
+"443","South Carolina","Public","SEC",2010,10.4,2011,4.5
+"444","Southern California","Private","Pac 12",2010,-7.7,2011,4
+"445","Virginia","Public","ACC",2010,8.3,2011,6.6
+"446","Washington","Public","Pac 12",2010,12.2,2011,15.4
+"447","Wisconsin","Public","Big 10",2010,7.7,2011,1.4
+"448","Vanderbilt","Private","SEC",2010,0,2011,13.9
+"449","Wake Forest","Private","ACC",2010,-16.7,2011,-6.6
+"450","Washington State","Public","Pac 12",2010,8.3,2011,12.8
+"451","Arizona State","Public","Pac 12",2011,-3.8,2012,-0.2
+"452","Auburn","Public","SEC",2011,-38.5,2012,-4.7
+"453","Baylor","Private","Big 12",2011,23.1,2012,-28.6
+"454","Clemson","Public","ACC",2011,25.3,2012,1.2
+"455","Duke","Private","ACC",2011,-2.3,2012,10.5
+"456","Florida State","Public","ACC",2011,0,2012,6.1
+"457","Georgia Tech","Public","ACC",2011,15.4,2012,4.4
+"458","Indiana","Public","Big 10",2011,-33.3,2012,0.1
+"459","Iowa State","Public","Big 12",2011,4.5,2012,-3.5
+"460","Kansas State","Public","Big 12",2011,23.1,2012,11.8
+"461","LSU","Public","SEC",2011,8.2,2012,-18.6
+"462","Michigan State","Public","Big 10",2011,-6,2012,6.4
+"463","Mississippi State","Public","SEC",2011,-15.4,2012,6.1
+"464","North Carolina State","Public","ACC",2011,-7.7,2012,1.8
+"465","Northwestern","Private","Big 10",2011,-7.7,2012,12.3
+"466","Ohio State","Public","Big 10",2011,-46.2,2012,-1.1
+"467","Oklahoma State","Public","Big 12",2011,7.7,2012,21.6
+"468","Oregon State","Public","Pac 12",2011,-16.7,2012,6.7
+"469","Penn State","Public","Big 10",2011,15.4,2012,9.5
+"470","Purdue","Public","Big 10",2011,20.5,2012,4.7
+"471","Stanford","Private","Pac 12",2011,-7.7,2012,6.6
+"472","Texas Tech","Public","Big 12",2011,-19.9,2012,2.6
+"473","Alabama","Public","SEC",2011,15.4,2012,19.3
+"474","Tennessee","Public","SEC",2011,-4.5,2012,4.6
+"475","Texas","Public","Big 12",2011,19.9,2012,8.7
+"476","Arizona","Public","Pac 12",2011,-20.5,2012,0.8
+"477","Arkansas","Public","SEC",2011,7.7,2012,0.7
+"478","California","Public","Pac 12",2011,12.2,2012,5.2
+"479","UCLA","Public","Pac 12",2011,9.5,2012,0
+"480","Florida","Public","SEC",2011,-7.7,2012,0.5
+"481","Georgia","Public","SEC",2011,25.3,2012,0.9
+"482","Illinois","Public","Big 10",2011,0,2012,9.4
+"483","Iowa","Public","Big 10",2011,-7.7,2012,2.6
+"484","Kansas","Public","Big 12",2011,-8.3,2012,-1.2
+"485","Kentucky","Public","SEC",2011,-4.5,2012,11.9
+"486","Maryland","Public","ACC",2011,-52.6,2012,-4
+"487","Michigan","Public","Big 10",2011,30.8,2012,7.5
+"488","Minnesota","Public","Big 10",2011,0,2012,-3.9
+"489","Mississippi","Public","SEC",2011,-16.7,2012,4.6
+"490","North Carolina","Public","ACC",2011,-7.7,2012,1.6
+"491","Oklahoma","Public","Big 12",2011,-8.8,2012,1.7
+"492","Oregon","Public","Pac 12",2011,-6.6,2012,24.3
+"493","South Carolina","Public","SEC",2011,20.3,2012,15.3
+"494","Southern California","Private","Pac 12",2011,21.8,2012,23.9
+"495","Virginia","Public","ACC",2011,28.2,2012,15.2
+"496","Washington","Public","Pac 12",2011,0,2012,0
+"497","Wisconsin","Public","Big 10",2011,-6,2012,-1.6
+"498","Vanderbilt","Private","SEC",2011,29.5,2012,14.1
+"499","Wake Forest","Private","ACC",2011,21.2,2012,15.6
+"500","Washington State","Public","Pac 12",2011,16.7,2012,13.2
+"501","Arizona State","Public","Pac 12",2012,15.4,2013,-26.8
+"502","Auburn","Public","SEC",2012,-36.5,2013,-9.8
+"503","Baylor","Private","Big 12",2012,-15.4,2013,5.1
+"504","Clemson","Public","ACC",2012,13.2,2013,8.4
+"505","Duke","Private","ACC",2012,21.2,2013,7.9
+"506","Florida State","Public","ACC",2012,16.5,2013,-1.5
+"507","Georgia Tech","Public","ACC",2012,-11.5,2013,4
+"508","Indiana","Public","Big 10",2012,25,2013,7.3
+"509","Iowa State","Public","Big 12",2012,0,2013,13.7
+"510","Kansas State","Public","Big 12",2012,7.7,2013,6.1
+"511","LSU","Public","SEC",2012,-15.9,2013,9.1
+"512","Michigan State","Public","Big 10",2012,-24.7,2013,4.2
+"513","Mississippi State","Public","SEC",2012,7.7,2013,7
+"514","North Carolina State","Public","ACC",2012,-7.7,2013,3
+"515","Northwestern","Private","Big 10",2012,30.8,2013,3.7
+"516","Ohio State","Public","Big 10",2012,53.8,2013,21.5
+"517","Oklahoma State","Public","Big 12",2012,-30.8,2013,-8.2
+"518","Oregon State","Public","Pac 12",2012,44.2,2013,1.8
+"519","Penn State","Public","Big 10",2012,-2.6,2013,4.5
+"520","Purdue","Public","Big 10",2012,-7.7,2013,-0.1
+"521","Stanford","Private","Pac 12",2012,1.1,2013,6
+"522","Texas Tech","Public","Big 12",2012,19.9,2013,6.3
+"523","Alabama","Public","SEC",2012,0.5,2013,17.3
+"524","Tennessee","Public","SEC",2012,0,2013,0
+"525","Texas","Public","Big 12",2012,7.7,2013,7.7
+"526","Arizona","Public","Pac 12",2012,28.2,2013,-2
+"527","Arkansas","Public","SEC",2012,-51.3,2013,12.9
+"528","California","Public","Pac 12",2012,-28.8,2013,16.5
+"529","UCLA","Public","Pac 12",2012,21.4,2013,18.1
+"530","Florida","Public","SEC",2012,30.8,2013,-1.1
+"531","Georgia","Public","SEC",2012,14.3,2013,5.1
+"532","Illinois","Public","Big 10",2012,-37.2,2013,5.6
+"533","Iowa","Public","Big 10",2012,-20.5,2013,11.4
+"534","Kansas","Public","Big 12",2012,-8.3,2013,23.5
+"535","Kentucky","Public","SEC",2012,-25,2013,30.7
+"536","Maryland","Public","ACC",2012,16.7,2013,3.6
+"537","Michigan","Public","Big 10",2012,-23.1,2013,10
+"538","Minnesota","Public","Big 10",2012,21.2,2013,12.8
+"539","Mississippi","Public","SEC",2012,37.2,2013,2.3
+"540","North Carolina","Public","ACC",2012,12.8,2013,25.5
+"541","Oklahoma","Public","Big 12",2012,0,2013,-5.7
+"542","Oregon","Public","Pac 12",2012,6.6,2013,-7.6
+"543","South Carolina","Public","SEC",2012,0,2013,9.9
+"544","Southern California","Private","Pac 12",2012,-29.5,2013,2.7
+"545","Virginia","Public","ACC",2012,-28.2,2013,6.6
+"546","Washington","Public","Pac 12",2012,0,2013,23.1
+"547","Wisconsin","Public","Big 10",2012,-21.4,2013,9.2
+"548","Vanderbilt","Private","SEC",2012,23.1,2013,9.7
+"549","Wake Forest","Private","ACC",2012,-4.5,2013,-2.5
+"550","Washington State","Public","Pac 12",2012,-8.3,2013,0.4
