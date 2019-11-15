@@ -6,8 +6,8 @@
 
 library(shiny)
 library(tidyverse)
-library(ggplot2)
 library(scales)
+library(ggplot2)
 library(shinythemes)
 
 college_data <- read.csv("football_academic_data.csv")
@@ -28,6 +28,35 @@ ui <- fluidPage(
     theme = shinytheme("united"),
     
     tabPanel(
+      title = "Conference Plot",
+      titlePanel("Plotted Correlations"),
+      sidebarPanel(
+        selectInput("conference", "Conference", conf_names),
+        radioButtons("pubstat", "University Status", pub_status),
+      ),
+      mainPanel(plotOutput("plot", hover = hoverOpts(id = "plot_hover")), uiOutput("hover_info"))
+    ),
+    
+    tabPanel(
+      title = "Statistics",
+      titlePanel("R Squared Tests"),
+      sidebarPanel(
+        selectInput("conf", "Conference", sort(unique(college_data$conference))),
+        uiOutput("secondSelection"),
+      ),
+    ),
+    
+    tabPanel(
+      title = "Findings Summary",
+      fluidRow(
+        column(12,
+               wellPanel(
+                 htmlOutput("summary")
+               ))
+      )
+    ),
+    
+    tabPanel(
       title = "About",
       fluidRow(
         column(12,
@@ -35,16 +64,7 @@ ui <- fluidPage(
                  htmlOutput("about")
                ))
       )
-    ), 
-    tabPanel(
-      "Interactive Plot",
-      titlePanel("Plotted Correlations"),
-      sidebarPanel(
-        selectInput("conference", "Conference", conf_names),
-        radioButtons("pubstat", "University Status", pub_status),
-      ),
-      mainPanel(plotOutput("plot", hover = hoverOpts(id = "plot_hover")), uiOutput("hover_info"))
-    )
+    ) 
     )
   
     
@@ -131,6 +151,11 @@ server <- function(input, output) {
         
       })    
       
+      
+    output$secondSelection <- renderUI({
+      selectInput("college", "College", sort(unique(college_data[college_data$conference == input$conf,"instnm"])))
+    })  
+      
      output$about <- renderUI({
        HTML(paste(
          h2("About This Project"),
@@ -150,6 +175,11 @@ server <- function(input, output) {
        ))
      })
     
+    output$summary <- renderUI({
+      HTML(paste(
+        h2("Takeaways from This Project")
+      ))
+    })
 }
 
 # Run the application 
