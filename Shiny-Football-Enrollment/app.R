@@ -1,12 +1,3 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 
 
 # LOOK AT THIS: https://shiny.rstudio.com/gallery/navbar-example.html
@@ -17,6 +8,7 @@ library(shiny)
 library(tidyverse)
 library(ggplot2)
 library(scales)
+library(shinythemes)
 
 college_data <- read.csv("football_academic_data.csv")
 
@@ -29,32 +21,28 @@ pub_status <- c("All", "Private", "Public")
 # Define UI for application 
 ui <- fluidPage(
   
-  navbarPage("Football & Enrollment Correlations",
-             tabPanel(
-               "About",
-               titlePanel("About This Project"),
-               br(),
-               div(
-                 "This project began after an informal observation of enrollment changes at Kansas State University (K-State), the local university in my hometown. Between 2010 and 2012 K-State's football team had phenomenal success - the team was ranked #1 in the nation for a time. During this same time period the university experienced record student enrollment rates. Meanwhile, K-State's in-state rival, the University of Kansas (KU), experienced some of the worst football seasons in university history during this timeframe. The university also suffered declining enrollment. Only a few years later, though, KSU began experiencing declining enrollment as its football team regressed. This made me wonder: do most large universities experience surges in enrollment when their football teams perform well and declines in enrollment when their teams struggle?"
-                 ),
-               br(),
-               div(
-                 "To answer my question I decided to analyze university application data and football team records (wins vs losses) for a period of approximately 10 years. I looked only at Power 5 universities - that is, universities whose football teams are members of either the Big 10, Big 12, SEC, ACC, or Pac 12 athletic conferences. I reason that these schools recruit students nationally rather than regionally, so their student bodies are more likely to change based on the performance of their football teams than are the student bodies of smaller, regional colleges. I chose not to look at data for universities that changed athletic conferences during the time period of interest since that change could effect enrollment changes. I gathered enrollment data from the National Center for Education Statistics and football data from the NCAA."
-                 ),
-               br(),
-               div(img(src="KU_medium.jpg")),
-               br()
-             ), 
+  navbarPage(
+    
+    title = "Football & Enrollment Correlations",
+    
+    theme = shinytheme("united"),
+    
+    tabPanel(
+      title = "About",
+      fluidRow(
+        column(12,
+               wellPanel(
+                 htmlOutput("about")
+               ))
+      )
+    ), 
     tabPanel(
       "Interactive Plot",
       titlePanel("Plotted Correlations"),
-      
-
       sidebarPanel(
         selectInput("conference", "Conference", conf_names),
         radioButtons("pubstat", "University Status", pub_status),
       ),
-      
       mainPanel(plotOutput("plot", hover = hoverOpts(id = "plot_hover")), uiOutput("hover_info"))
     )
     )
@@ -141,8 +129,26 @@ server <- function(input, output) {
         
         
         
-      })                       
-   
+      })    
+      
+     output$about <- renderUI({
+       HTML(paste(
+         h2("About This Project"),
+         br(),
+         div(
+           "This project began after an informal observation of enrollment changes at Kansas State University (K-State), the local university in my hometown. Between 2010 and 2012 K-State's football team had phenomenal success - the team was ranked #1 in the nation for a time. During this same time period the university experienced record student enrollment rates. Meanwhile, K-State's in-state rival, the University of Kansas (KU), experienced some of the worst football seasons in university history during this timeframe. The university also suffered declining enrollment. Only a few years later, though, KSU began experiencing declining enrollment as its football team regressed. This made me wonder: do most large universities experience surges in enrollment when their football teams perform well and declines in enrollment when their teams struggle?"
+         ),
+         br(),
+         div(
+           "To answer my question I decided to analyze university application data and football team records (wins vs losses) for a period of approximately 10 years. I looked only at Power 5 universities - that is, universities whose football teams are members of either the Big 10, Big 12, SEC, ACC, or Pac 12 athletic conferences. I reason that these schools recruit students nationally rather than regionally, so their student bodies are more likely to change based on the performance of their football teams than are the student bodies of smaller, regional colleges. I chose not to look at data for universities that changed athletic conferences during the time period of interest since that change could effect enrollment changes. I gathered enrollment data from the National Center for Education Statistics and football data from the NCAA."
+         ),
+         br(),
+         div(img(src="KU_medium.jpg")),
+         br(),
+         h4("About the Author"),
+         p("Rick Brown is a sophomore studying economics at Harvard College. He is interested in the intersection of economics, sociology, and government as well as all things related to Kansas.")
+       ))
+     })
     
 }
 

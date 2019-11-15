@@ -153,13 +153,15 @@ sec_table <- sec_table %>%
 football_data <- bind_rows(big_10_table, sec_table, big_12_table, pac_12_table, acc_table) %>%
   filter(!is.na(Win_2000) & !is.na(Win)) 
 
-# This code fixes an error where for some reason data columns for 2012 don't
-# have a suffix in their title
+# This code fixes an error in which data columns for 2012 don't have a year
+# suffix in their title
 
 colnames(football_data)[colnames(football_data)=="Win"] <- "Win_2012"
 colnames(football_data)[colnames(football_data)=="Loss"] <- "Loss_2012"
 
-#
+# Here I create a new set of columns equaling each team's win percentage for
+# each season. For each year from 2000 through 2012 I take the number of wins a
+# team had and divide this number by the sum of the team's wins and losses
 
 for(i in 2000:2012) {
   football_data[[paste0("win_pct_", i)]] <-
