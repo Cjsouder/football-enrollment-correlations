@@ -18,7 +18,7 @@ library(tidyverse)
 library(ggplot2)
 library(scales)
 
-college_data <- read.csv("tidy_per_data.csv")
+college_data <- read.csv("football_academic_data.csv")
 
 conf_names <- c("All", "ACC", "Big 10", "Big 12", "Pac 12", "SEC")
 
