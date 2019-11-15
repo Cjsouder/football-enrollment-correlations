@@ -114,7 +114,9 @@ table_maker <- function(power5){
   
 }
 
-#
+# Create a dataset for each of the 5 major football conferences via the
+# table_maker function. Add a column to each table indicating the conference
+# name
 
 big_10_table <- table_maker(big_10) %>%
   mutate(Conference = "Big 10")
@@ -127,13 +129,16 @@ pac_12_table <- table_maker(pac_12) %>%
 sec_table    <- table_maker(sec) %>%
   mutate(Conference = "SEC")
 
-
 # The SEC data lists Mississippi under two names, "Ole Miss" and "Mississippi",
 # so I combine the results for both listings under the name "Mississippi"
 
 sec_table$Name <- replace(sec_table$Name, sec_table$Name=="Ole Miss", "Mississippi")
 
-#
+# Merge results for "Ole Miss" and "Mississippi". In the previous step I renamed
+# the entry for "Ole Miss" to "Mississippi", but the results for this college
+# remain spread out over two rows. I group by college, then duplicate results
+# such that the blank spaces in each row for Mississippi are filled in. I keep
+# one of the resulting entries and delete the duplicate.
 
 sec_table <- sec_table %>%
   group_by(Name) %>%
@@ -161,14 +166,18 @@ for(i in 2000:2012) {
     (football_data[[paste0("Win_", i)]]) / (football_data[[paste0("Win_", i)]] + football_data[[paste0("Loss_", i)]])
 }
 
-#
+# I use the clean_names() function to make the titles in both datasets easier to
+# read and reference.
 
 academic_data <- read.csv("university_data_clean.csv") %>%
   clean_names()
 football_data <- football_data %>%
   clean_names()
 
-#
+# This chunk of code changes all university names in the football_data table
+# such that "St." now reads "State". I do this so that the football_data and
+# academic_data tables reference universities by a common name, allowing me to
+# merge the tables in a later step.
 
 football_data <- football_data %>%
   mutate(name = gsub("St\\.", "State", name)) 
@@ -194,7 +203,8 @@ academic_data <- academic_data %>%
 
 names(academic_data) <- gsub("_rv", "", names(academic_data))
 
-#
+# I merge academic_data and football_data into a new table, merged_data, with
+# results joined by institution name
 
 merged_data <- left_join(academic_data, football_data, by=c("instnm" = "name"))
 
@@ -213,6 +223,7 @@ for(i in 2001:2011){
   merged_data[[paste0("win_pct_diff_",i+1)]] <- merged_data[[paste0("win_pct_", i+1)]] - merged_data[[paste0("win_pct_", i)]]
 }
 
+#
 
 merged_data <- merged_data %>%
   select(
