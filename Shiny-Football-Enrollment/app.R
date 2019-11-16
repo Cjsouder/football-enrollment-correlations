@@ -46,12 +46,13 @@ ui <- fluidPage(
     
     tabPanel(
       title = "Statistics",
-      titlePanel("R Squared Tests"),
+      titlePanel("R Squared Test"),
       sidebarPanel(
         selectInput("conf", "Conference", sort(unique(college_data$conference))),
         uiOutput("secondSelection"),
       ),
-      mainPanel(plotOutput("stat_plot"))
+      mainPanel(plotOutput("stat_plot"),
+                plotOutput("scatter_plot", hover = hoverOpts(id = "plot_scat")), uiOutput("hover_scatter"))
     ),
     
     tabPanel(
@@ -191,6 +192,13 @@ server <- function(input, output) {
       
     })
     
+    scatterInput <- reactive({
+      
+      scatter_data <- college_data %>%
+        filter(instnm == input$college)
+      
+    })
+    
     output$stat_plot <- renderPlot(
       
       ggplot(repInput(), aes(x = r_squared)) +
@@ -202,13 +210,62 @@ server <- function(input, output) {
         labs(
           title = "title",
           subtitle = "subtitle",
-          x = "x",
-          y = "y",
+          x = bquote("R"^2),
+          y = "Density",
           caption = "caption"
         )
       
     )
     
+    output$scatter_plot <- renderPlot(
+      ggplot(scatterInput(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
+        geom_point() + 
+        geom_jitter(aes(color = conference)) +
+        geom_smooth(method='lm') +
+        scale_y_continuous(labels = percent_format(scale = 1)) +
+        scale_x_continuous(labels = percent_format(scale = 1)) +
+        labs(
+          title = "University Applications vs. Football Team Success",
+          subtitle = "Change in Applications per Change in Football Team Ranking Over the Previous Year",
+          x = "Percent Change in University Football Games Won",
+          y = "Percent Change in Applications to University",
+          caption = "Showing data for Power 5 universities that did not change conferences between 2000 and 2012",
+          color = "Conference"
+        )
+    )
+    
+    output$hover_scatter <- renderUI({
+      hover <- input$plot_scat
+      point <- nearPoints(dataInput(), hover, threshold = 5, maxpoints = 1, addDist = TRUE)
+      if(nrow(point) == 0){return(NULL)} 
+      
+      # calculate point position INSIDE the image as percent of total dimensions
+      # from left (horizontal) and from top (vertical)
+      
+      left_pct <- (hover$x - hover$domain$left) / (hover$domain$right - hover$domain$left)
+      top_pct <- (hover$domain$top - hover$y) / (hover$domain$top - hover$domain$bottom)
+      
+      # calculate distance from left and bottom side of the picture in pixels
+      left_px <- hover$range$left + left_pct * (hover$range$right - hover$range$left)
+      top_px <- hover$range$top + top_pct * (hover$range$bottom - hover$range$top)
+      
+      # create style property fot tooltip
+      # background color is set so tooltip is a bit transparent
+      # z-index is set so we are sure are tooltip will be on top
+      
+      style <- paste0("position:absolute; z-index:100; background-color: rgba(245, 245, 245, 0.85); ",
+                      "left:", left_px + 2, "px; top:", top_px + 260, "px;")
+      
+      # actual tooltip created as wellPanel
+      wellPanel(
+        style = style,
+        p(HTML(paste0("<b> College: </b>", point$instnm, "<br/>",
+                      "<b> Application Year: </b>", point$year2, "<br/>",
+                      "<b> Change in Wins: </b>", point$win_pct_diff, "%", "<br/>", 
+                      "<b> Change in Applications: </b>", point$applcn_pct_chng, "%")))
+      )
+      
+    }) 
     
      output$about <- renderUI({
        HTML(paste(
