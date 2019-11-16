@@ -11,6 +11,8 @@ library(ggplot2)
 library(shinythemes)
 
 college_data <- read.csv("football_academic_data.csv")
+fit_data <- read.csv("fit_data.csv")
+reps_data <- read.csv("reps_data.csv")
 
 conf_names <- c("All", "ACC", "Big 10", "Big 12", "Pac 12", "SEC")
 
@@ -20,6 +22,11 @@ pub_status <- c("All", "Private", "Public")
 
 # Define UI for application 
 ui <- fluidPage(
+  
+  tags$style(type="text/css",
+             ".shiny-output-error { visibility: hidden; }",
+             ".shiny-output-error:before { visibility: hidden; }"
+  ),
   
   navbarPage(
     
@@ -44,6 +51,7 @@ ui <- fluidPage(
         selectInput("conf", "Conference", sort(unique(college_data$conference))),
         uiOutput("secondSelection"),
       ),
+      mainPanel(plotOutput("stat_plot"))
     ),
     
     tabPanel(
@@ -154,8 +162,54 @@ server <- function(input, output) {
       
     output$secondSelection <- renderUI({
       selectInput("college", "College", sort(unique(college_data[college_data$conference == input$conf,"instnm"])))
+            
     })  
       
+    repInput <- reactive({
+      
+      reps2_data <- reps_data %>%
+        filter(instnm == input$college)
+      
+    })
+    
+    quantileInput <- reactive({
+      
+      quant_data <- reps_data %>%
+        filter(instnm == input$college) 
+      
+      quant_data <- quant_data %>%
+        summarise(quants = list(enframe(quantile(quant_data$r_squared, probs=c(0.025,0.5,0.975))))) %>%
+        unnest() %>%
+        spread(key = name, value = value)
+      
+    })
+    
+    fitInput <- reactive({
+      
+      fit2_data <- fit_data %>%
+        filter(instnm == input$college)
+      
+    })
+    
+    output$stat_plot <- renderPlot(
+      
+      ggplot(repInput(), aes(x = r_squared)) +
+        geom_density() + 
+        geom_vline(data = quantileInput(), aes(xintercept= `50%`)) +
+        geom_vline(data = quantileInput(), aes(xintercept= `2.5%`), linetype = "dashed") +
+        geom_vline(data = quantileInput(), aes(xintercept= `97.5%`), linetype = "dashed") +
+        geom_vline(data = fitInput(), aes(xintercept = r_squared, color = "red")) +
+        labs(
+          title = "title",
+          subtitle = "subtitle",
+          x = "x",
+          y = "y",
+          caption = "caption"
+        )
+      
+    )
+    
+    
      output$about <- renderUI({
        HTML(paste(
          h2("About This Project"),
