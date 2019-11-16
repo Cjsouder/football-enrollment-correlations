@@ -145,7 +145,7 @@ server <- function(input, output) {
         # z-index is set so we are sure are tooltip will be on top
         
         style <- paste0("position:absolute; z-index:100; background-color: rgba(245, 245, 245, 0.85); ",
-                        "left:", left_px + 2, "px; top:", top_px + 2, "px;")
+                        "left:", left_px - 200, "px; top:", top_px + 2, "px;")
         
         # actual tooltip created as wellPanel
         wellPanel(
@@ -225,7 +225,7 @@ server <- function(input, output) {
         scale_y_continuous(labels = percent_format(scale = 1)) +
         scale_x_continuous(labels = percent_format(scale = 1)) +
         labs(
-          title = "University Applications vs. Football Team Success",
+          title = paste("University Applications vs. Football Team Success:", input$college),
           subtitle = "Change in Applications per Change in Football Team Ranking Over the Previous Year",
           x = "Percent Change in University Football Games Won",
           y = "Percent Change in Applications to University",
@@ -254,13 +254,12 @@ server <- function(input, output) {
       # z-index is set so we are sure are tooltip will be on top
       
       style <- paste0("position:absolute; z-index:100; background-color: rgba(245, 245, 245, 0.85); ",
-                      "left:", left_px + 2, "px; top:", top_px + 260, "px;")
+                      "left:", left_px - 200, "px; top:", top_px + 280, "px;")
       
       # actual tooltip created as wellPanel
       wellPanel(
         style = style,
-        p(HTML(paste0("<b> College: </b>", point$instnm, "<br/>",
-                      "<b> Application Year: </b>", point$year2, "<br/>",
+        p(HTML(paste0("<b> Application Year: </b>", point$year2, "<br/>",
                       "<b> Change in Wins: </b>", point$win_pct_diff, "%", "<br/>", 
                       "<b> Change in Applications: </b>", point$applcn_pct_chng, "%")))
       )
