@@ -56,7 +56,7 @@ ui <- fluidPage(
     ),
     
     tabPanel(
-      title = "Findings Summary",
+      title = "Conclusions",
       fluidRow(
         column(12,
                wellPanel(
@@ -278,15 +278,20 @@ server <- function(input, output) {
          div(
            "To answer my question I decided to analyze university application data and football team records (wins vs losses) for a period of approximately 10 years. I looked only at Power 5 universities - that is, universities whose football teams are members of either the Big 10, Big 12, SEC, ACC, or Pac 12 athletic conferences. I reason that these schools recruit students nationally rather than regionally, so their student bodies are more likely to change based on the performance of their football teams than are the student bodies of smaller, regional colleges. I chose not to look at data for universities that changed athletic conferences during the time period of interest since that change could effect enrollment changes."
          ),
+
          br(),
          div("I gathered enrollment data from the National Center for Education Statistics and football data from the NCAA, accessible at https://nces.ed.gov/ipeds/datacenter/InstitutionByName.aspx and http://web1.ncaa.org/stats/StatsSrv/rankings?doWhat=archive&sportCode=MFB"),
          br(),
-         p("The Github Repo for this project can be found at https://github.com/rbrown146/football-enrollment-correlations"),
+         p(
+           "The Github Repo for this project can be found at https://github.com/rbrown146/football-enrollment-correlations"
+         ),
          br(),
-         div(img(src="KU_medium.jpg")),
+         div(img(src = "KU_medium.jpg")),
          br(),
          h4("About the Author"),
-         p("Rick Brown is a sophomore studying economics at Harvard College. He is interested in the intersection of economics, sociology, and government as well as all things related to Kansas."),
+         p(
+           "Rick Brown is a sophomore studying economics at Harvard College. He is interested in the intersection of economics, sociology, and government as well as all things related to Kansas."
+         ),
          p("Rick can be contacted at rbrown@college.harvard.edu")
        ))
      })
@@ -302,7 +307,10 @@ server <- function(input, output) {
          br(),
          div(
            "The data becomes more interesting when analyzed by college. Some colleges seem to be affected by outliers - for example, Georgia Tech's r-squared estimate of percent change in enrollment per percent change in football wins appears to be roughly .125, a rather low value. However, a 95% confidence interval created from bootstrapping 1000 samples from the dataset contains r-squared values up to approximately r-squared = .625. Plotting a scatterplot of datapoints makes it evident that there is one point on the far left that is skewing results. Some universities have r-squared values that are relatively high. Purdue, for instance, has an r-squared value approximately equal to .45, while Washington State has a r-squared value of .625. Most universities, though, have low r-squared values and scatterplots with points that are fairly spread out. Some colleges, like Iowa State, have regression lines with negative slopes as a result."
-         )
+         ),
+         br(),
+         h4("Possible Problems with Setup"),
+         div("Many assumptions were made when setting up this model that may have influenced outcomes. When plotting datapoints for each application year the change in applications for that year was matched with the change in football wins that occured in the previous year. For example, a datapoint representing the change in applications between 2010 and 2011 would be matched with football data representing the change in wins from 2009 to 2010. The reasoning for modeling the data in this manner was that applicants would apply before seeing results of the current season. However, both application and football seasons begin at roughly the end of August, so it is possible that applicants were influenced by more recent data when making application decisions. Also, perhaps the change in football wins is not a valid measure of the quality of a football team. Maybe there is a higher correlation between college applications and football teams entering or moving up in the AP list of top 25 programs.")
          
        ))
     })
