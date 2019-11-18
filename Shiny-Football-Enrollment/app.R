@@ -276,20 +276,35 @@ server <- function(input, output) {
          ),
          br(),
          div(
-           "To answer my question I decided to analyze university application data and football team records (wins vs losses) for a period of approximately 10 years. I looked only at Power 5 universities - that is, universities whose football teams are members of either the Big 10, Big 12, SEC, ACC, or Pac 12 athletic conferences. I reason that these schools recruit students nationally rather than regionally, so their student bodies are more likely to change based on the performance of their football teams than are the student bodies of smaller, regional colleges. I chose not to look at data for universities that changed athletic conferences during the time period of interest since that change could effect enrollment changes. I gathered enrollment data from the National Center for Education Statistics and football data from the NCAA."
+           "To answer my question I decided to analyze university application data and football team records (wins vs losses) for a period of approximately 10 years. I looked only at Power 5 universities - that is, universities whose football teams are members of either the Big 10, Big 12, SEC, ACC, or Pac 12 athletic conferences. I reason that these schools recruit students nationally rather than regionally, so their student bodies are more likely to change based on the performance of their football teams than are the student bodies of smaller, regional colleges. I chose not to look at data for universities that changed athletic conferences during the time period of interest since that change could effect enrollment changes."
          ),
+         br(),
+         div("I gathered enrollment data from the National Center for Education Statistics and football data from the NCAA, accessible at https://nces.ed.gov/ipeds/datacenter/InstitutionByName.aspx and http://web1.ncaa.org/stats/StatsSrv/rankings?doWhat=archive&sportCode=MFB"),
+         br(),
+         p("The Github Repo for this project can be found at https://github.com/rbrown146/football-enrollment-correlations"),
          br(),
          div(img(src="KU_medium.jpg")),
          br(),
          h4("About the Author"),
-         p("Rick Brown is a sophomore studying economics at Harvard College. He is interested in the intersection of economics, sociology, and government as well as all things related to Kansas.")
+         p("Rick Brown is a sophomore studying economics at Harvard College. He is interested in the intersection of economics, sociology, and government as well as all things related to Kansas."),
+         p("Rick can be contacted at rbrown@college.harvard.edu")
        ))
      })
     
-    output$summary <- renderUI({
-      HTML(paste(
-        h2("Takeaways from This Project")
-      ))
+     output$summary <- renderUI({
+       HTML(paste(
+         h2("Takeaways from This Project"),
+         br(),
+         h4("Correlations Seem Weak"),
+         div(
+           "The slope of the regression line relating change in football wins to change in college enrollment is nearly flat for the data as a whole. When results are narrowed by conference the slope of the resulting regression line is marginally steeper for some conferences (Big 10, Big 12, Pac 12) but has a slight negative slope for others (ACC)."
+         ),
+         br(),
+         div(
+           "The data becomes more interesting when analyzed by college. Some colleges seem to be affected by outliers - for example, Georgia Tech's r-squared estimate of percent change in enrollment per percent change in football wins appears to be roughly .125, a rather low value. However, a 95% confidence interval created from bootstrapping 1000 samples from the dataset contains r-squared values up to approximately r-squared = .625. Plotting a scatterplot of datapoints makes it evident that there is one point on the far left that is skewing results. Some universities have r-squared values that are relatively high. Purdue, for instance, has an r-squared value approximately equal to .45, while Washington State has a r-squared value of .625. Most universities, though, have low r-squared values and scatterplots with points that are fairly spread out. Some colleges, like Iowa State, have regression lines with negative slopes as a result."
+         )
+         
+       ))
     })
 }
 
