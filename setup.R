@@ -2,6 +2,9 @@ library(tidyverse)
 library(rvest)
 library(magrittr)
 library(janitor)
+library(rstanarm)
+library(broom)
+library(moderndive)
 
 #
 
@@ -248,8 +251,51 @@ merged_data <- merged_data %>%
   filter(year2 == year + 1) %>%
   rename("pub_status" = pubprime_ic2017) %>%
   mutate(win_pct_diff = round(win_pct_diff * 100, digits = 1), 
-         applcn_pct_chng = round(applcn_pct_chng * 100, digits = 1)) %>%
+         applcn_pct_chng = round(applcn_pct_chng * 100, digits = 1)) 
+
+#
+
+merged_data %>%
   write.csv(file = "./Shiny-Football-Enrollment/football_academic_data.csv")
 
+#
 
+grouped <- merged_data %>%
+  group_by(instnm, conference) %>%
+  nest() %>%
+  mutate(lm_data = map(data, ~ lm(applcn_pct_chng ~ win_pct_diff, data = .x))) %>%
+  mutate(r_squared = map(lm_data, ~ pull(select(glance(.x), "r.squared")))) %>%
+  select(-lm_data) 
 
+#
+
+grouped_final <- grouped %>%
+  select(-data) %>%
+  mutate(r_squared = as.double(r_squared))
+
+#
+
+apply(grouped_final,2,as.character) %>%
+  write.csv("./Shiny-Football-Enrollment/fit_data.csv")
+
+#
+
+reps <- grouped %>%
+  select(-r_squared) %>%
+  mutate(entries = map(data, ~ rep_sample_n(tbl = .x, size = nrow(.x), replace = TRUE, reps = 1000))) %>%
+  unnest(entries) %>%
+  group_by(instnm, conference, replicate) %>%
+  nest() 
+
+#
+
+reps2 <- reps %>%
+  mutate(lm_data = map(data, ~ lm(applcn_pct_chng ~ win_pct_diff, data = .x))) %>%
+  mutate(r_squared = map(lm_data, ~ pull(select(glance(.x), "r.squared"))))
+
+#
+
+reps2 %>%
+  select(-lm_data, -data, -replicate) %>%
+  mutate(r_squared = as.double(r_squared)) %>%
+  write.csv("./Shiny-Football-Enrollment/reps_data.csv")
