@@ -23,10 +23,6 @@ pub_status <- c("All", "Private", "Public")
 # Define UI for application 
 ui <- fluidPage(
   
-  tags$style(type="text/css",
-             ".shiny-output-error { visibility: hidden; }",
-             ".shiny-output-error:before { visibility: hidden; }"
-  ),
   
   navbarPage(
     
@@ -154,8 +150,6 @@ server <- function(input, output) {
                         "<b> Change in Applications: </b>", point$applcn_pct_chng, "%")))
         )
         
-        
-        
       })    
       
       
@@ -166,12 +160,22 @@ server <- function(input, output) {
       
     rep_input <- reactive({
       
+      # This tells Shiny that user input will be referenced within this reactive
+      # element (Shiny throws a warning otherwise)
+      
+      req(input$college)
+      
       reps2_data <- reps_data %>%
         filter(instnm == input$college)
       
     })
     
     quantile_input <- reactive({
+      
+      # This tells Shiny that user input will be referenced within this reactive
+      # element (Shiny throws a warning otherwise)
+      
+      req(input$college)
       
       quant_data <- reps_data %>%
         filter(instnm == input$college) 
@@ -185,6 +189,11 @@ server <- function(input, output) {
     
     fitInput <- reactive({
       
+      # This tells Shiny that user input will be referenced within this reactive
+      # element (Shiny throws a warning otherwise)
+      
+      req(input$college)
+      
       fit2_data <- fit_data %>%
         filter(instnm == input$college)
       
@@ -192,8 +201,14 @@ server <- function(input, output) {
     
     scatter_input <- reactive({
       
+      # This tells Shiny that user input will be referenced within this reactive
+      # element (Shiny throws a warning otherwise)
+      
+      req(input$college)
+      
       scatter_data <- college_data %>%
         filter(instnm == input$college)
+
       
     })
     
@@ -278,7 +293,8 @@ server <- function(input, output) {
          div(
            "To answer my question I decided to analyze university application data and football team records (wins vs losses) for a period of approximately 10 years. I looked only at Power 5 universities - that is, universities whose football teams are members of either the Big 10, Big 12, SEC, ACC, or Pac 12 athletic conferences. I reason that these schools recruit students nationally rather than regionally, so their student bodies are more likely to change based on the performance of their football teams than are the student bodies of smaller, regional colleges. I chose not to look at data for universities that changed athletic conferences during the time period of interest since that change could effect enrollment changes."
          ),
-
+         br(),
+         div(""),
          br(),
          div("I gathered enrollment data from the National Center for Education Statistics and football data from the NCAA, accessible at https://nces.ed.gov/ipeds/datacenter/InstitutionByName.aspx and http://web1.ncaa.org/stats/StatsSrv/rankings?doWhat=archive&sportCode=MFB"),
          br(),
