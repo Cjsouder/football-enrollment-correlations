@@ -6,9 +6,9 @@
 
 library(shiny)
 library(tidyverse)
-library(scales)
 library(ggplot2)
 library(shinythemes)
+library(scales)
 
 college_data <- read.csv("football_academic_data.csv")
 fit_data <- read.csv("fit_data.csv")
@@ -49,7 +49,7 @@ ui <- fluidPage(
       titlePanel("R Squared Test"),
       sidebarPanel(
         selectInput("conf", "Conference", sort(unique(college_data$conference))),
-        uiOutput("secondSelection"),
+        uiOutput("second_selection"),
       ),
       mainPanel(plotOutput("stat_plot"),
                 plotOutput("scatter_plot", hover = hoverOpts(id = "plot_scat")), uiOutput("hover_scatter"))
@@ -83,7 +83,7 @@ ui <- fluidPage(
 # Define server logic required to draw output
 server <- function(input, output) {
   
-    dataInput <- reactive({ 
+    data_input <- reactive({ 
       switch(input$pubstat,
              "Public" = filter_data <- college_data %>%
                filter(pub_status == "Public"),
@@ -108,18 +108,16 @@ server <- function(input, output) {
     })   
       output$plot <- renderPlot(
         
-      ggplot(dataInput(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
+      ggplot(data_input(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
                                   geom_point() + 
                                   geom_jitter(aes(color = conference)) +
                                   geom_smooth(method='lm') +
-                                  scale_y_continuous(labels = percent_format(scale = 1)) +
-                                  scale_x_continuous(labels = percent_format(scale = 1)) +
                                   labs(
-                                    title = "University Applications vs. Football Team Success",
+                                    title = paste("University Applications vs. Football Team Success:", input$conference),
                                     subtitle = "Change in Applications per Change in Football Team Ranking Over the Previous Year",
                                     x = "Percent Change in University Football Games Won",
                                     y = "Percent Change in Applications to University",
-                                    caption = "Showing data for Power 5 universities that did not change conferences between 2000 and 2012",
+                                    caption = "Showing data for Power 5 universities that did not change conferences between 2000 and 2012.\nFootball data at each datapoint corresponds to the season before the application year of that datapoint.",
                                     color = "Conference"
                                   )
       
@@ -127,7 +125,7 @@ server <- function(input, output) {
             
       output$hover_info <- renderUI({
         hover <- input$plot_hover
-        point <- nearPoints(dataInput(), hover, threshold = 5, maxpoints = 1, addDist = TRUE)
+        point <- nearPoints(data_input(), hover, threshold = 5, maxpoints = 1, addDist = TRUE)
         if(nrow(point) == 0){return(NULL)} 
         
         # calculate point position INSIDE the image as percent of total dimensions
@@ -161,19 +159,19 @@ server <- function(input, output) {
       })    
       
       
-    output$secondSelection <- renderUI({
+    output$second_selection <- renderUI({
       selectInput("college", "College", sort(unique(college_data[college_data$conference == input$conf,"instnm"])))
             
     })  
       
-    repInput <- reactive({
+    rep_input <- reactive({
       
       reps2_data <- reps_data %>%
         filter(instnm == input$college)
       
     })
     
-    quantileInput <- reactive({
+    quantile_input <- reactive({
       
       quant_data <- reps_data %>%
         filter(instnm == input$college) 
@@ -192,51 +190,52 @@ server <- function(input, output) {
       
     })
     
-    scatterInput <- reactive({
+    scatter_input <- reactive({
       
       scatter_data <- college_data %>%
         filter(instnm == input$college)
       
     })
     
+
     output$stat_plot <- renderPlot(
       
-      ggplot(repInput(), aes(x = r_squared)) +
+      ggplot(rep_input(), aes(x = r_squared)) +
         geom_density() + 
-        geom_vline(data = quantileInput(), aes(xintercept= `50%`)) +
-        geom_vline(data = quantileInput(), aes(xintercept= `2.5%`), linetype = "dashed") +
-        geom_vline(data = quantileInput(), aes(xintercept= `97.5%`), linetype = "dashed") +
+        geom_vline(data = quantile_input(), aes(xintercept= `50%`)) +
+        geom_vline(data = quantile_input(), aes(xintercept= `2.5%`), linetype = "dashed") +
+        geom_vline(data = quantile_input(), aes(xintercept= `97.5%`), linetype = "dashed") +
         geom_vline(data = fitInput(), aes(xintercept = r_squared, color = "red")) +
+        guides(colour = FALSE) +
         labs(
-          title = "title",
-          subtitle = "subtitle",
+          title = expression(paste("R"^2, " estimate of Percent Change in Applications per Percent Change in Football Wins")),
+          subtitle = paste("Density plot of 1000 bootstrapped samples:", input$college),
           x = bquote("R"^2),
           y = "Density",
-          caption = "caption"
+          caption = "Dashed lines show boundary of 95% confidence interval of bootstrapped samples. Solid black line shows median. \nRed line shows observed R-squared value of non-bootstrapped data."
         )
       
     )
     
     output$scatter_plot <- renderPlot(
-      ggplot(scatterInput(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
+      ggplot(scatter_input(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
         geom_point() + 
         geom_jitter(aes(color = conference)) +
         geom_smooth(method='lm') +
-        scale_y_continuous(labels = percent_format(scale = 1)) +
-        scale_x_continuous(labels = percent_format(scale = 1)) +
+        guides(colour = FALSE) +
         labs(
           title = paste("University Applications vs. Football Team Success:", input$college),
           subtitle = "Change in Applications per Change in Football Team Ranking Over the Previous Year",
           x = "Percent Change in University Football Games Won",
           y = "Percent Change in Applications to University",
-          caption = "Showing data for Power 5 universities that did not change conferences between 2000 and 2012",
+          caption = "Football data at each datapoint corresponds to the season before the application year of that datapoint",
           color = "Conference"
         )
     )
     
     output$hover_scatter <- renderUI({
       hover <- input$plot_scat
-      point <- nearPoints(dataInput(), hover, threshold = 5, maxpoints = 1, addDist = TRUE)
+      point <- nearPoints(data_input(), hover, threshold = 5, maxpoints = 1, addDist = TRUE)
       if(nrow(point) == 0){return(NULL)} 
       
       # calculate point position INSIDE the image as percent of total dimensions
@@ -265,6 +264,8 @@ server <- function(input, output) {
       )
       
     }) 
+    
+    
     
      output$about <- renderUI({
        HTML(paste(
