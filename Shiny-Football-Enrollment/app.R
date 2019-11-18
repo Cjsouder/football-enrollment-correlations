@@ -1,26 +1,25 @@
-
-
-# LOOK AT THIS: https://shiny.rstudio.com/gallery/navbar-example.html
-# https://shiny.rstudio.com/gallery/plot-interaction-basic.html
-# https://shiny.rstudio.com/gallery/plot-interaction-advanced.html
-
 library(shiny)
 library(tidyverse)
 library(ggplot2)
 library(shinythemes)
 library(scales)
 
+# Read in csv files with data
+
 college_data <- read.csv("football_academic_data.csv")
 fit_data <- read.csv("fit_data.csv")
 reps_data <- read.csv("reps_data.csv")
 
+#
+
 conf_names <- c("All", "ACC", "Big 10", "Big 12", "Pac 12", "SEC")
+
+#
 
 pub_status <- c("All", "Private", "Public")
 
+# Create the app's user interface
 
-
-# Define UI for application 
 ui <- fluidPage(
   
   
@@ -76,7 +75,8 @@ ui <- fluidPage(
   
 )
 
-# Define server logic required to draw output
+# Code reactive elements of app
+
 server <- function(input, output) {
   
     data_input <- reactive({ 
@@ -280,7 +280,8 @@ server <- function(input, output) {
       
     }) 
     
-    
+    # Create the About page. This code chunk adds all the text that will
+    # appear on the page.
     
      output$about <- renderUI({
        HTML(paste(
@@ -294,12 +295,16 @@ server <- function(input, output) {
            "To answer my question I decided to analyze university application data and football team records (wins vs losses) for a period of approximately 10 years. I looked only at Power 5 universities - that is, universities whose football teams are members of either the Big 10, Big 12, SEC, ACC, or Pac 12 athletic conferences. I reason that these schools recruit students nationally rather than regionally, so their student bodies are more likely to change based on the performance of their football teams than are the student bodies of smaller, regional colleges. I chose not to look at data for universities that changed athletic conferences during the time period of interest since that change could effect enrollment changes."
          ),
          br(),
-         div(""),
+         h4("Reasoning Behind Choice of Models"),
+         div("Coming Soon!"),
          br(),
-         div("I gathered enrollment data from the National Center for Education Statistics and football data from the NCAA, accessible at https://nces.ed.gov/ipeds/datacenter/InstitutionByName.aspx and http://web1.ncaa.org/stats/StatsSrv/rankings?doWhat=archive&sportCode=MFB"),
+         h4("External Links"),
+         div(
+           "I gathered enrollment data from the", a("National Center for Education Statistics", href = "https://nces.ed.gov/ipeds/datacenter/InstitutionByName.aspx"), "and football data from the", a("NCAA." , href = "http://web1.ncaa.org/stats/StatsSrv/rankings?doWhat=archive&sportCode=MFB")
+         ),
          br(),
-         p(
-           "The Github Repo for this project can be found at https://github.com/rbrown146/football-enrollment-correlations"
+         div(
+           "The Github Repo for this project can be found", a("here.", href = "https://github.com/rbrown146/football-enrollment-correlations")
          ),
          br(),
          div(img(src = "KU_medium.jpg")),
@@ -312,6 +317,9 @@ server <- function(input, output) {
        ))
      })
     
+     # Create the Conclusion page. This code chunk adds all the text that will
+     # appear on the page.
+     
      output$summary <- renderUI({
        HTML(paste(
          h2("Takeaways from This Project"),
@@ -326,11 +334,13 @@ server <- function(input, output) {
          ),
          br(),
          h4("Possible Problems with Setup"),
-         div("Many assumptions were made when setting up this model that may have influenced outcomes. When plotting datapoints for each application year the change in applications for that year was matched with the change in football wins that occured in the previous year. For example, a datapoint representing the change in applications between 2010 and 2011 would be matched with football data representing the change in wins from 2009 to 2010. The reasoning for modeling the data in this manner was that applicants would apply before seeing results of the current season. However, both application and football seasons begin at roughly the end of August, so it is possible that applicants were influenced by more recent data when making application decisions. Also, perhaps the change in football wins is not a valid measure of the quality of a football team. Maybe there is a higher correlation between college applications and football teams entering or moving up in the AP list of top 25 programs.")
-         
+         div(
+           "Many assumptions were made when setting up this model that may have influenced outcomes. When plotting datapoints for each application year the change in applications for that year was matched with the change in football wins that occured in the previous year. For example, a datapoint representing the change in applications between 2010 and 2011 would be matched with football data representing the change in wins from 2009 to 2010. The reasoning for modeling the data in this manner was that applicants would apply before seeing results of the current season. However, both application and football seasons begin at roughly the end of August, so it is possible that applicants were influenced by more recent data when making application decisions. Also, perhaps the change in football wins is not a valid measure of the quality of a football team. Maybe there is a higher correlation between college applications and football teams entering or moving up in the AP list of top 25 programs."
+         )
        ))
     })
 }
 
 # Run the application 
+
 shinyApp(ui = ui, server = server)
