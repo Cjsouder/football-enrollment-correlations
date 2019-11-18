@@ -21,13 +21,21 @@ pub_status <- c("All", "Private", "Public")
 # Create the app's user interface
 
 ui <- fluidPage(
-  
+  # Create a navbar at the top of the app
   
   navbarPage(
+    # Title the navbar
     
     title = "Football & Enrollment Correlations",
     
+    # Apply a premade Shiny theme to the app
+    
     theme = shinytheme("united"),
+    
+    # Add first element to the navbar and the corresponding page to which it
+    # links. This page, "Conference Plot", is coded to contain a dropdown
+    # selector and radio buttons beside a main plot. The plot reacts when
+    # hovered over.
     
     tabPanel(
       title = "Conference Plot",
@@ -37,49 +45,48 @@ ui <- fluidPage(
         radioButtons("pubstat", "University Status", pub_status),
       ),
       mainPanel(plotOutput("plot", hover = hoverOpts(id = "plot_hover")), uiOutput("hover_info"))
-    ),
+    ), 
+    
+    # Add second element to the navbar and the corresponding page to which it
+    # links. This page, "Statistics", contains two dropdown selectors and two
+    # plots, the second of which reacts when hovered over.
     
     tabPanel(
       title = "Statistics",
       titlePanel("R Squared Test"),
       sidebarPanel(
-        selectInput("conf", "Conference", sort(unique(college_data$conference))),
+        selectInput("conf", "Conference", sort(unique(
+          college_data$conference
+        ))),
         uiOutput("second_selection"),
       ),
-      mainPanel(plotOutput("stat_plot"),
-                plotOutput("scatter_plot", hover = hoverOpts(id = "plot_scat")), uiOutput("hover_scatter"))
-    ),
-    
-    tabPanel(
-      title = "Conclusions",
-      fluidRow(
-        column(12,
-               wellPanel(
-                 htmlOutput("summary")
-               ))
+      mainPanel(
+        plotOutput("stat_plot"),
+        plotOutput("scatter_plot", hover = hoverOpts(id = "plot_scat")),
+        uiOutput("hover_scatter")
       )
-    ),
-    
-    tabPanel(
-      title = "About",
-      fluidRow(
-        column(12,
-               wellPanel(
-                 htmlOutput("about")
-               ))
-      )
-    ) 
-    )
-  
-    
-  
+    ), 
+    tabPanel(title = "Conclusions",
+             fluidRow(column(12,
+                             wellPanel(
+                               htmlOutput("summary")
+                             )))), 
+    tabPanel(title = "About",
+             fluidRow(column(
+               12,
+               wellPanel(htmlOutput("about"))
+             )))
+  )
 )
 
 # Code reactive elements of app
 
 server <- function(input, output) {
   
-    data_input <- reactive({ 
+    data_input <- reactive({
+      
+      #
+      
       switch(input$pubstat,
              "Public" = filter_data <- college_data %>%
                filter(pub_status == "Public"),
@@ -87,6 +94,8 @@ server <- function(input, output) {
                filter(pub_status == "Private"),
              "All" = filter_data <- college_data
                )
+      
+      #
       
       switch(input$conference,
              "All" = filter_data <- filter_data, 
