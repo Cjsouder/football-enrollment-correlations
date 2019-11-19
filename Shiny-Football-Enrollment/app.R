@@ -92,9 +92,14 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   
+    # This code processess the inputs selected by the user on the Conference
+    # Plot page
+  
     data_input <- reactive({
       
-      #
+      # Filter the data displayed in the scatterplot depending on which radio
+      # button is selected by the user. These options relate to the
+      # public/private status of each university.
       
       switch(input$pubstat,
              "Public" = filter_data <- college_data %>%
@@ -104,7 +109,9 @@ server <- function(input, output) {
              "All" = filter_data <- college_data
                )
       
-      #
+      # Filter the data displayed in the scatterplot depending on which option
+      # is selected from the dropdown list. These options dictate which
+      # conference to plot.
       
       switch(input$conference,
              "All" = filter_data <- filter_data, 
@@ -117,11 +124,16 @@ server <- function(input, output) {
              "Pac 12" = filter_data <- filter_data %>%
                filter(conference == "Pac 12"),
              "SEC" = filter_data <- filter_data %>%
-               filter(conference == "SEC"))
-      
+               filter(conference == "SEC")
+             )
     })
     
-    #
+    # Code a scatterplot on the Conference Plot page according to the inputs
+    # selected by the user (processed and stored under the name "data_input").
+    # Percentage change in football games won is plotted on the x axis and
+    # percentage change in applications is plotted on the y axis. I use
+    # geom_jitter to show points that otherwise would be hidden beneath others,
+    # and I plot a regression line to show the general relationship of the data.
     
     output$plot <- renderPlot(
       ggplot(data_input(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
@@ -138,27 +150,29 @@ server <- function(input, output) {
         )
     )
        
-    #
+    # Display a window with summary information whenever a user hovers over the
+    # scatterplot on the Conference Plot page
            
     output$hover_info <- renderUI({
         
-      #
+      # Create new variables "hover" and "point" that tell R whether the cursor
+      # is hovering over the data and how far the cursor is from the data points.
         
       hover <- input$plot_hover
       point <- nearPoints(data_input(), hover, threshold = 5, maxpoints = 1, addDist = TRUE)
         
-      #
+      # This tells R to only display a window if the cursor is near a datapoint
         
       if(nrow(point) == 0){return(NULL)} 
         
-      # Calculate the percent location from the left and top sides of the
-      # window of the cursor
+      # Calculate the percent location of the cursor from the left and top sides
+      # of the window
         
       left_pct <- (hover$x - hover$domain$left) / (hover$domain$right - hover$domain$left)
       top_pct <- (hover$domain$top - hover$y) / (hover$domain$top - hover$domain$bottom)
         
-      # Calculate the pixel distance from the left and bottom sides of the
-      # window of the cursor
+      # Calculate the pixel distance of the cursor from the left and bottom
+      # sides of the window
         
       left_px <- hover$range$left + left_pct * (hover$range$right - hover$range$left)
       top_px <- hover$range$top + top_pct * (hover$range$bottom - hover$range$top)
@@ -201,6 +215,8 @@ server <- function(input, output) {
       
     })
     
+    #
+    
     quantile_input <- reactive({
       
       # This tells Shiny that user input will be referenced within this reactive
@@ -218,7 +234,9 @@ server <- function(input, output) {
       
     })
     
-    fitInput <- reactive({
+    #
+    
+    fit_input <- reactive({
       
       # This tells Shiny that user input will be referenced within this reactive
       # element (Shiny throws a warning otherwise)
@@ -229,6 +247,8 @@ server <- function(input, output) {
         filter(instnm == input$college)
       
     })
+    
+    #
     
     scatter_input <- reactive({
       
@@ -242,7 +262,13 @@ server <- function(input, output) {
       
     })
     
-    #
+    # Create a density plot showing the distribution of the r-squared values of
+    # the percent change in applications per percent change in football wins for
+    # 1000 bootstraped samples selected according to the the college chosen by
+    # the user. I use data from the quantile_input and fit_input dataframes to
+    # plot the observed r-squared value of the data as well as the median and
+    # boundaries of a 95% confidence interval generatted from bootstrapping. I
+    # color the observed r-squared value red so that it stands out.
     
     output$stat_plot <- renderPlot(
       ggplot(rep_input(), aes(x = r_squared)) +
@@ -250,7 +276,7 @@ server <- function(input, output) {
         geom_vline(data = quantile_input(), aes(xintercept= `50%`)) +
         geom_vline(data = quantile_input(), aes(xintercept= `2.5%`), linetype = "dashed") +
         geom_vline(data = quantile_input(), aes(xintercept= `97.5%`), linetype = "dashed") +
-        geom_vline(data = fitInput(), aes(xintercept = r_squared, color = "red")) +
+        geom_vline(data = fit_input(), aes(xintercept = r_squared, color = "red")) +
         guides(colour = FALSE) +
         labs(
           title = expression(paste("R"^2, " estimate of Percent Change in Applications per Percent Change in Football Wins")),
@@ -261,7 +287,12 @@ server <- function(input, output) {
         )
     )
     
-    #
+    # Code a scatterplot on the Statistics page according to the inputs selected
+    # by the user (processed and stored under the name "scatter_input").
+    # Percentage change in football games won is plotted on the x axis and
+    # percentage change in applications is plotted on the y axis. I use
+    # geom_jitter to show points that otherwise would be hidden beneath others,
+    # and I plot a regression line to show the general relationship of the data.
     
     output$scatter_plot <- renderPlot(
       ggplot(scatter_input(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
@@ -279,25 +310,29 @@ server <- function(input, output) {
         )
     )
     
+    # Display a window with summary information whenever a user hovers over the
+    # scatterplot on the Statistics page
+    
     output$hover_scatter <- renderUI({
       
-      #
+      # Create new variables "hover" and "point" that tell R whether the cursor
+      # is hovering over the data and how far the cursor is from the data points.
       
       hover <- input$plot_scat
       point <- nearPoints(data_input(), hover, threshold = 5, maxpoints = 1, addDist = TRUE)
       
-      #
+      # This tells R to only display a window if the cursor is near a datapoint
       
       if(nrow(point) == 0){return(NULL)} 
       
-      # Calculate the percent location from the left and top sides of the
-      # window of the cursor
+      # Calculate the percent location of the cursor from the left and top sides
+      # of the window
       
       left_pct <- (hover$x - hover$domain$left) / (hover$domain$right - hover$domain$left)
       top_pct <- (hover$domain$top - hover$y) / (hover$domain$top - hover$domain$bottom)
       
-      # Calculate the pixel distance from the left and bottom sides of the
-      # window of the cursor
+      # Calculate the pixel distance of the cursor from the left and bottom
+      # sides of the window
       
       left_px <- hover$range$left + left_pct * (hover$range$right - hover$range$left)
       top_px <- hover$range$top + top_pct * (hover$range$bottom - hover$range$top)
