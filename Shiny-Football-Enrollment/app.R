@@ -195,14 +195,19 @@ server <- function(input, output) {
       )
     })    
       
-    #
+    # Display a second drop down list containing only the names of the colleges
+    # that are part of the conference selected by the user on the Statistics
+    # page of the app. Only results for the college selected from this dropdown
+    # list will be used to generate the graphs on the Statistics page of the app
     
     output$second_selection <- renderUI({
       selectInput("college", "College", sort(unique(college_data[college_data$conference == input$conf, "instnm"])))
     })  
     
-    #
-      
+    # This function processes the data used to generate the density plot on the
+    # Statistics page of the app such that only datapoints corresponding to the
+    # college chosen by the user will be included in the plot
+    
     rep_input <- reactive({
       
       # This tells Shiny that user input will be referenced within this reactive
@@ -210,12 +215,18 @@ server <- function(input, output) {
       
       req(input$college)
       
+      # Filter the data such that only results for the college selected by the user are shown
+      
       reps2_data <- reps_data %>%
         filter(instnm == input$college)
       
     })
     
-    #
+    # Limit the data of bootstrapped samples to only results corresponding to
+    # the college selected by the user on the Statistics page of the app.
+    # Calculate the median and boundaries of the 95% confidence interval of
+    # r-squared values for this data, and store these values. They will later be
+    # used to plot lines on the density plot.
     
     quantile_input <- reactive({
       
@@ -224,8 +235,16 @@ server <- function(input, output) {
       
       req(input$college)
       
+      # Filter the data such that only results for the college selected by the user remain
+      
       quant_data <- reps_data %>%
         filter(instnm == input$college) 
+      
+      # Determine the median and 95% confidence interval of the r-squared data
+      # generated from bootstrapping samples from the data of the college
+      # selected by the user. The result is reformatted so that data is easy to
+      # pull. This data will be used to plot lines denoting the median and
+      # boundaries of the confidence interval on the density graph
       
       quant_data <- quant_data %>%
         summarise(quants = list(enframe(quantile(quant_data$r_squared, probs=c(0.025,0.5,0.975))))) %>%
@@ -234,7 +253,9 @@ server <- function(input, output) {
       
     })
     
-    #
+    # From the dataset of r-squared values calculated without bootstrapping
+    # limit results to only the college chosen by the user. This data will later
+    # be used to plot a line at that r-squared value on the density plot.
     
     fit_input <- reactive({
       
@@ -243,12 +264,16 @@ server <- function(input, output) {
       
       req(input$college)
       
+      # Filter the data such that only the result for the college selected by the user is shown
+      
       fit2_data <- fit_data %>%
         filter(instnm == input$college)
       
     })
     
-    #
+    # This function processes the data used to generate the scatter plot on the
+    # Statistics page of the app such that only datapoints corresponding to the
+    # college chosen by the user will be plotted
     
     scatter_input <- reactive({
       
@@ -256,6 +281,8 @@ server <- function(input, output) {
       # element (Shiny throws a warning otherwise)
       
       req(input$college)
+      
+      # Filter the data such that only results for the college selected by the user are shown
       
       scatter_data <- college_data %>%
         filter(instnm == input$college)
