@@ -43,6 +43,7 @@ ui <- fluidPage(
     tabPanel(
       title = "Conference Plot",
       titlePanel("Plotted Correlations"),
+      br(),
       sidebarPanel(
         selectInput("conference", "Conference", conf_names),
         radioButtons("pubstat", "University Status", pub_status),
@@ -57,6 +58,7 @@ ui <- fluidPage(
     tabPanel(
       title = "Statistics",
       titlePanel("R Squared Test"),
+      br(),
       sidebarPanel(
         selectInput("conf", "Conference", sort(unique(
           college_data$conference
@@ -133,12 +135,14 @@ server <- function(input, output) {
     # Percentage change in football games won is plotted on the x axis and
     # percentage change in applications is plotted on the y axis. I use
     # geom_jitter to show points that otherwise would be hidden beneath others,
-    # and I plot a regression line to show the general relationship of the data.
+    # and I color points by conference (if the user selects "All") or college
+    # name if the user chooses a particular conference. Finally, I plot a
+    # regression line to show the general relationship of the data.
     
     output$plot <- renderPlot(
       ggplot(data_input(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
         geom_point() +
-        geom_jitter(aes(color = conference)) +
+        geom_jitter(aes_string(color = ifelse(input$conference == "All", "conference", "instnm"))) +
         geom_smooth(method = 'lm') +
         labs(
           title = paste("University Applications vs. Football Team Success:", input$conference),
