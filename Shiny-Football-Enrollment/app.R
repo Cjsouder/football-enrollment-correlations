@@ -150,7 +150,7 @@ server <- function(input, output) {
           x = "Percent Change in University Football Games Won",
           y = "Percent Change in Applications to University",
           caption = "Showing data for Power 5 universities that did not change conferences between 2000 and 2012.\nFootball data at each datapoint corresponds to the season before the application year of that datapoint.",
-          color = "Conference"
+          color = ifelse(input$conference == "All", "Conference", "College")
         )
     )
        
