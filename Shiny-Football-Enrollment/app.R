@@ -346,7 +346,7 @@ server <- function(input, output) {
       
       quant_data <- quant_data %>%
         summarise(quants = list(enframe(quantile(quant_data$r_squared, probs=c(0.025,0.5,0.975))))) %>%
-        unnest() %>%
+        unnest(cols = c(quants)) %>%
         spread(key = name, value = value)
       
     })
@@ -397,7 +397,7 @@ server <- function(input, output) {
     
     output$stat_plot <- renderPlot(
       ggplot(rep_input(), aes(x = r_squared)) +
-        geom_density() + 
+        geom_density() +
         geom_vline(data = quantile_input(), aes(xintercept= `50%`)) +
         geom_vline(data = quantile_input(), aes(xintercept= `2.5%`), linetype = "dashed") +
         geom_vline(data = quantile_input(), aes(xintercept= `97.5%`), linetype = "dashed") +
@@ -409,7 +409,7 @@ server <- function(input, output) {
           x = bquote("R"^2),
           y = "Density",
           caption = "Dashed lines show boundary of 95% confidence interval of bootstrapped samples. Solid black line shows median. \nRed line shows observed R-squared value of non-bootstrapped data."
-        ) 
+        )
     )
     
     # Code a scatterplot on the Statistics page according to the inputs selected
