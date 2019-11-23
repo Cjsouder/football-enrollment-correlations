@@ -132,13 +132,92 @@ server <- function(input, output) {
              )
     })
     
+    # Create vectors assigning colors to each college's scatterpoint. I think
+    # this makes the scatterplot more aesthetically pleasing. (Before I did this
+    # R assigned Oklahoma a sky blue point. That didn't seem right!)
+    
+    conf_colors <-
+      c(
+        "ACC" = "lightskyblue",
+        "Big 10" = "royalblue",
+        "Big 12" = "red",
+        "Pac 12" = "lightsteelblue",
+        "SEC" = "gold"
+      )
+    acc_colors <-
+      c(
+        "Clemson" = "darkorange",
+        "Duke" = "blue",
+        "Florida State" = "firebrick",
+        "Georgia Tech" = "gold",
+        "Maryland" = "black",
+        "North Carolina" = "deepskyblue",
+        "North Carolina State" = "red",
+        "Virginia" = "gray",
+        "Wake Forest" = "#9E7E38"
+      )
+    big_10_colors <-
+      c(
+        "Illinois" = "darkorange",
+        "Indiana" = "gray",
+        "Iowa" = "gold",
+        "Michigan" = "blue",
+        "Michigan State" = "limegreen",
+        "Minnesota" = "black",
+        "Northwestern" = "#ae34eb",
+        "Ohio State" = "firebrick",
+        "Penn State" = "deepskyblue",
+        "Purdue" = "#ceb888",
+        "Wisconsin" = "red"
+      )
+    big_12_colors <-
+      c(
+        "Baylor" = "#32CD32",
+        "Iowa State" = "#F1BE48",
+        "Kansas" = "blue",
+        "Kansas State" = "#ae34eb",
+        "Oklahoma" = "firebrick",
+        "Oklahoma State" = "black",
+        "Texas" = "darkorange",
+        "Texas Tech" = "red"
+      )
+    pac_12_colors <-
+      c(
+        "Arizona" = "gray",
+        "Arizona State" = "gold",
+        "California" = "blue",
+        "Oregon" = "limegreen",
+        "Oregon State" = "darkorange",
+        "Southern California" = "red",
+        "Stanford" = "firebrick",
+        "UCLA" = "deepskyblue",
+        "Washington" = "#ae34eb",
+        "Washington State" = "#5E6A71"
+      )
+    sec_colors <-
+      c(
+        "Alabama" = "firebrick",
+        "Arkansas" = "pink",
+        "Auburn" = "tan",
+        "Florida" = "blue",
+        "Georgia" = "red",
+        "Kentucky" = "deepskyblue",
+        "LSU" = "#ae34eb",
+        "Mississippi" = "limegreen",
+        "Mississippi State" = "Gray",
+        "South Carolina" = "black",
+        "Tennessee" = "orange",
+        "Vanderbilt" = "#866d4b"
+      )
+    
     # Code a scatterplot on the Conference Plot page according to the inputs
     # selected by the user (processed and stored under the name "data_input").
     # Percentage change in football games won is plotted on the x axis and
     # percentage change in applications is plotted on the y axis. I use
     # geom_jitter to show points that otherwise would be hidden beneath others,
     # and I color points by conference (if the user selects "All") or college
-    # name if the user chooses a particular conference. Finally, I plot a
+    # name if the user chooses a particular conference. I assign college colors
+    # based on values specified in the vectors above. Finally, I plot a
     # regression line to show the general relationship of the data.
     
     output$plot <- renderPlot(
@@ -153,7 +232,20 @@ server <- function(input, output) {
           y = "Percent Change in Applications to University",
           caption = "Showing data for Power 5 universities that did not change conferences between 2000 and 2012.\nFootball data at each datapoint corresponds to the season before the application year of that datapoint.",
           color = ifelse(input$conference == "All", "Conference", "College")
-        )
+        ) +
+        scale_color_manual(values = if (input$conference == "All") {
+          conf_colors
+        } else if (input$conference == "ACC") {
+          acc_colors
+        } else if (input$conference == "Big 10") {
+          big_10_colors
+        } else if (input$conference == "Big 12") {
+          big_12_colors
+        } else if (input$conference == "Pac 12") {
+          pac_12_colors
+        } else {
+          sec_colors
+        })
     )
        
     # Display a window with summary information whenever a user hovers over the
@@ -317,7 +409,7 @@ server <- function(input, output) {
           x = bquote("R"^2),
           y = "Density",
           caption = "Dashed lines show boundary of 95% confidence interval of bootstrapped samples. Solid black line shows median. \nRed line shows observed R-squared value of non-bootstrapped data."
-        )
+        ) 
     )
     
     # Code a scatterplot on the Statistics page according to the inputs selected
@@ -340,7 +432,7 @@ server <- function(input, output) {
           y = "Percent Change in Applications to University",
           caption = "Football data at each datapoint corresponds to the season before the application year of that datapoint",
           color = "Conference"
-        )
+        ) 
     )
     
     # Display a window with summary information whenever a user hovers over the
