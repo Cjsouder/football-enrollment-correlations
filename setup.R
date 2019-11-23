@@ -122,18 +122,18 @@ table_maker <- function(power5){
   
   df_final <- df_list[[1]]
   
-  #  Each remaining entry in df_list is appended to df_final. (The code in the
-  #  'for' parenthesis tells R the number of times to run the loop in order to
-  #  append all of the remaining values of df_list, and not the first value, to
-  #  df_final.) Results for the same school are combined by name, and each win
-  #  and loss column has a year suffix appended to its name (with the exception
-  #  of the last win and loss columns).
+  # Each remaining entry in df_list is appended to df_final. (The code in the
+  # 'for' parenthesis tells R the number of times to run the loop in order to
+  # append all of the remaining values of df_list, and not the first value, to
+  # df_final.) Results for the same school are combined by name, and each win
+  # and loss column has a year suffix appended to its name (with the exception
+  # of the last win and loss columns).
   
   for(i in head(seq_along(df_list), -1)){
     df_final <- merge(df_final, df_list[[i+1]], all = TRUE, suffixes = season[i:(i+1)], by = "Name")
   }
   
-  #  The product produced by the 'for' loop is returned by calling df_final
+  # The product produced by the 'for' loop is returned by calling df_final
   
   df_final
   
@@ -209,7 +209,10 @@ football_data <- football_data %>%
 football_data <- football_data %>%
   mutate(name = gsub("St\\.", "State", name)) 
 
-#
+# Edit the names of colleges in the academic_data dataset so that they match the
+# names in the football_data dataset. Remove an unnecessary column and change
+# values in pubprime_ic2017 to read either "Public" or "Private" depending on
+# the status of the university.
 
 academic_data <- academic_data %>%
   select(-x) %>%
@@ -226,7 +229,7 @@ academic_data <- academic_data %>%
   mutate(pubprime_ic2017 = gsub("-2", "Private", pubprime_ic2017)) %>%
   mutate(pubprime_ic2017 = gsub("2", "Public", pubprime_ic2017))
 
-#
+# Remove the "_rv" suffix from column names in the academic_data dataset
 
 names(academic_data) <- gsub("_rv", "", names(academic_data))
 
@@ -235,22 +238,33 @@ names(academic_data) <- gsub("_rv", "", names(academic_data))
 
 merged_data <- left_join(academic_data, football_data, by=c("instnm" = "name"))
 
-#
+# Create two new types of variables for each pair of back-to-back years from
+# 2002 to 2012: "applcn_diff_", which equals the difference between the number
+# of applications in the later year vs. the earlier one, and "applcn_pct_chng_",
+# which equals the percent change in the number of applications in the later
+# year vs. the earlier one (an appropriate year suffix is appended to each
+# instance of "applcn_diff_" and "applcn_pct_chng_").
 
 for(i in 2002:2012){
   merged_data[[paste0("applcn_diff_",i+1)]] <- merged_data[[paste0("applcn_ic", i+1)]] - merged_data[[paste0("applcn_ic", i)]]
   merged_data[[paste0("applcn_pct_chng_",i+1)]] <- (merged_data[[paste0("applcn_ic", i+1)]] - merged_data[[paste0("applcn_ic", i)]])/merged_data[[paste0("applcn_ic", i)]]
 }
 
-#
+# Create a new type of variable, "win_pct_diff_", for each pair of back-to-back
+# years from 2001 to 2011. (The years of football data don't quite match up with
+# the years of academic data.) This value equals the percent change in the
+# number of wins in the later year vs. the earlier one (an appropriate year
+# suffix is appended to each instance of "win_pct_diff_").
 
 for(i in 2001:2011){
-  merged_data[[paste0("win_diff_",i+1)]] <- merged_data[[paste0("win_", i+1)]] - merged_data[[paste0("win_", i)]] 
-  merged_data[[paste0("loss_diff_",i+1)]] <- merged_data[[paste0("loss_", i+1)]] - merged_data[[paste0("loss_", i)]]
   merged_data[[paste0("win_pct_diff_",i+1)]] <- merged_data[[paste0("win_pct_", i+1)]] - merged_data[[paste0("win_pct_", i)]]
 }
 
-#
+# Clean up the dataset: remove irrelevant columns, reorganize the dataset to be
+# tidy via gather functions (with data grouped by "year" and "year2" columns,
+# where "year2" is the year of academic data and "year" is the year of football
+# data, such that each "year2" value is paired with the prior "year" value), and
+# convert percent values from decimals to integers.
 
 merged_data <- merged_data %>%
   select(
@@ -275,7 +289,7 @@ merged_data <- merged_data %>%
   mutate(win_pct_diff = round(win_pct_diff * 100, digits = 1), 
          applcn_pct_chng = round(applcn_pct_chng * 100, digits = 1)) 
 
-#
+# Export the tidy dataset as a csv file
 
 merged_data %>%
   write.csv(file = "./Shiny-Football-Enrollment/football_academic_data.csv")
