@@ -263,8 +263,8 @@ for(i in 2001:2011){
 # Clean up the dataset: remove irrelevant columns, reorganize the dataset to be
 # tidy via gather functions (with data grouped by "year" and "year2" columns,
 # where "year2" is the year of academic data and "year" is the year of football
-# data, such that each "year2" value is paired with the prior "year" value), and
-# convert percent values from decimals to integers.
+# data, such that each "year2" value is paired with the prior year's "year"
+# value), and convert percent values from decimals to integers.
 
 merged_data <- merged_data %>%
   select(
@@ -294,7 +294,13 @@ merged_data <- merged_data %>%
 merged_data %>%
   write.csv(file = "./Shiny-Football-Enrollment/football_academic_data.csv")
 
-#
+# Calculate the R-squared value for each college. Group results by college and
+# conference and nest them. (While it is unnecessary to group by conference I do
+# this so that this value will be readily accessible outside of the nested
+# data.) For each nested result calculate a univeriate regression that explains
+# the percent change in applications to colleges in terms of each college's
+# football win percentage. Pull the R-squared value from the resulting data for
+# each result and store it as "r_squared". Remove unnecessary columns.
 
 grouped <- merged_data %>%
   group_by(instnm, conference) %>%
@@ -303,18 +309,25 @@ grouped <- merged_data %>%
   mutate(r_squared = map(lm_data, ~ pull(select(glance(.x), "r.squared")))) %>%
   select(-lm_data) 
 
-#
+# Prepare the data to be exported. Remove unnecessary columns and convert
+# r_squared values to doubles.
 
 grouped_final <- grouped %>%
   select(-data) %>%
   mutate(r_squared = as.double(r_squared))
 
-#
+# Save the processed data in a csv file
 
 apply(grouped_final,2,as.character) %>%
   write.csv("./Shiny-Football-Enrollment/fit_data.csv")
 
-#
+# Calculate the R-squared value of bootstrapped data for each college. Create
+# 1000 bootstrapped samples for each college. First pull up the "grouped"
+# dataset, which contains nested results grouped by college and conference.
+# Create 1000 reps for each nested set of college data, then regroup results by
+# college, conference and rep (dropping unnecessary columns from "grouped" in
+# the process). While it is unnecessary to group by conference I do this so that
+# this value will be readily accessible outside of the nested data.
 
 reps <- grouped %>%
   select(-r_squared) %>%
@@ -323,13 +336,17 @@ reps <- grouped %>%
   group_by(instnm, conference, replicate) %>%
   nest() 
 
-#
+# For each nested result in the dataset calculate a univeriate regression that
+# explains the percent change in applications to colleges in terms of each
+# college's football win percentage. Pull the R-squared value from the resulting
+# data for each result and store it as "r_squared".
 
 reps2 <- reps %>%
   mutate(lm_data = map(data, ~ lm(applcn_pct_chng ~ win_pct_diff, data = .x))) %>%
   mutate(r_squared = map(lm_data, ~ pull(select(glance(.x), "r.squared"))))
 
-#
+# Remove unnecessary columns, convert r_squared values to doubles, and save the
+# data in a csv file
 
 reps2 %>%
   select(-lm_data, -data, -replicate) %>%
