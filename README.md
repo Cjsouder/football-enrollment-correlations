@@ -1,1 +1,5 @@
-# football-enrollment-correlations
+# Football & Enrollment Correlations
+
+The goal of this project is to determine whether or not changes in the percentage of games won by a college's football team correlate with a noticeable change in applications to the college. For most colleges and conferences this correlation turns out to be quite weak, leading me to conclude that the two metrics I ananlyze are unrelated. There are a few colleges that are exceptions to this rule, though, such as Washington State University and Auburn. It would be interesting to find out more about these colleges to determine why the correlations are so strong for them as compared to other colleges. 
+
+I use data from the NCAA and NCES. To analyze the data I plot a scatterplot relating percent change in games won to percent change in college applications for each conference. I generate a density plot that shows the r-squared values produced for each college by bootstrapping.
