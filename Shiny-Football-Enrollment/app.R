@@ -22,75 +22,71 @@ conf_names <- c("All", "ACC", "Big 10", "Big 12", "Pac 12", "SEC")
 
 pub_status <- c("All", "Private", "Public")
 
-# Create the app's user interface
+# Create the app's user interface, placing a navbar at the top of the app
 
-ui <- fluidPage(
+ui <- navbarPage(
   
-  # Create a navbar at the top of the app
+  # Title the navbar
   
-  navbarPage(
-    
-    # Title the navbar
-    
-    title = "Football & Enrollment Correlations",
-    
-    # Apply a premade Shiny theme to the app
-    
-    theme = shinytheme("united"),
-    
-    # Add first element to the navbar and code the page to which it links. This
-    # page, "Conference Plot", is coded to contain a dropdown selector and radio
-    # buttons beside a main plot. The plot reacts when hovered over.
-    
-    tabPanel(
-      title = "Conference Plot",
-      titlePanel("Plotted Correlations"),
-      br(),
-      sidebarPanel(
-        selectInput("conference", "Conference", conf_names),
-        radioButtons("pubstat", "University Status", pub_status),
-      ),
-      mainPanel(plotOutput("plot", hover = hoverOpts(id = "plot_hover")), uiOutput("hover_info"))
-    ), 
-    
-    # Add second element to the navbar and code the page to which it links. This
-    # page, "Statistics", contains two dropdown selectors and two plots, the
-    # second of which reacts when hovered over.
-    
-    tabPanel(
-      title = "Statistics",
-      titlePanel("R Squared Test"),
-      br(),
-      sidebarPanel(
-        selectInput("conf", "Conference", sort(unique(
-          college_data$conference
-        ))),
-        uiOutput("second_selection"),
-      ),
-      mainPanel(
-        plotOutput("stat_plot"),
-        plotOutput("scatter_plot", hover = hoverOpts(id = "plot_scat")),
-        uiOutput("hover_scatter")
-      )
-    ), 
-    
-    # Add third element to the navbar and code the page to which it links. This
-    # page, "Conclusions, contains only text.
-    
-    tabPanel(
-      title = "Conclusions", 
-      fluidRow(column(12, wellPanel(htmlOutput("summary"))))
-    ), 
-    
-    # Add final element to the navbar and code the page to which it links. This
-    # page, "About", contains only text.
-    
-    tabPanel(
-      title = "About", 
-      fluidRow(column(12, wellPanel(htmlOutput("about"))))
+  title = "Football & Enrollment Correlations",
+  
+  # Apply a premade Shiny theme to the app
+  
+  theme = shinytheme("united"),
+  
+  # Add first element to the navbar and code the page to which it links. This
+  # page, "Conference Plot", is coded to contain a dropdown selector and radio
+  # buttons beside a main plot. The plot reacts when hovered over.
+  
+  tabPanel(
+    title = "Conference Plot",
+    titlePanel("Plotted Correlations"),
+    br(),
+    sidebarPanel(
+      selectInput("conference", "Conference", conf_names),
+      radioButtons("pubstat", "University Status", pub_status),
+    ),
+    mainPanel(plotOutput("plot", hover = hoverOpts(id = "plot_hover")), uiOutput("hover_info"))
+  ),
+  
+  # Add second element to the navbar and code the page to which it links. This
+  # page, "Statistics", contains two dropdown selectors and two plots, the
+  # second of which reacts when hovered over.
+  
+  tabPanel(
+    title = "Statistics",
+    titlePanel("R Squared Test"),
+    br(),
+    sidebarPanel(
+      selectInput("conf", "Conference", sort(unique(
+        college_data$conference
+      ))),
+      uiOutput("second_selection"),
+    ),
+    mainPanel(
+      plotOutput("stat_plot"),
+      plotOutput("scatter_plot", hover = hoverOpts(id = "plot_scat")),
+      uiOutput("hover_scatter")
     )
-  )
+  ),
+  
+  # Add third element to the navbar and code the page to which it links. This
+  # page, "Conclusions, contains only text.
+  
+  tabPanel(title = "Conclusions",
+           fluidRow(column(
+             12, wellPanel(htmlOutput("summary"))
+           ))),
+  
+  # Add final element to the navbar and code the page to which it links. This
+  # page, "About", contains only text.
+  
+  tabPanel(title = "About",
+           fluidRow(column(
+             12, wellPanel(htmlOutput("about"))
+           )))
 )
+
 
 # Code reactive elements of app
 
