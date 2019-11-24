@@ -460,42 +460,43 @@ server <- function(input, output) {
     
     output$hover_scatter <- renderUI({
       
-      # Create new variables "hover" and "point" that tell R whether the cursor
-      # is hovering over the data and how far the cursor is from the data points.
+      # Create new variables "hover_input" and "point_input" that tell R whether
+      # the cursor is hovering over the data and how far the cursor is from the
+      # data points.
       
-      hover <- input$plot_scat
-      point <- nearPoints(data_input(), hover, threshold = 5, maxpoints = 1, addDist = TRUE)
+      hover_input <- input$plot_scat
+      point_input <- nearPoints(scatter_input(), hover_input, threshold = 5, maxpoints = 1, addDist = TRUE)
       
       # This tells R to only display a window if the cursor is near a datapoint
       
-      if(nrow(point) == 0){return(NULL)} 
+      if(nrow(point_input) == 0){return(NULL)} 
       
       # Calculate the percent location of the cursor from the left and top sides
       # of the window
       
-      left_pct <- (hover$x - hover$domain$left) / (hover$domain$right - hover$domain$left)
-      top_pct <- (hover$domain$top - hover$y) / (hover$domain$top - hover$domain$bottom)
+      left_percent <- (hover_input$x - hover_input$domain$left) / (hover_input$domain$right - hover_input$domain$left)
+      top_percent <- (hover_input$domain$top - hover_input$y) / (hover_input$domain$top - hover_input$domain$bottom)
       
       # Calculate the pixel distance of the cursor from the left and bottom
       # sides of the window
       
-      left_px <- hover$range$left + left_pct * (hover$range$right - hover$range$left)
-      top_px <- hover$range$top + top_pct * (hover$range$bottom - hover$range$top)
+      left_pixel <- hover_input$range$left + left_percent * (hover_input$range$right - hover_input$range$left)
+      top_pixel <- hover_input$range$top + top_percent * (hover_input$range$bottom - hover_input$range$top)
       
       # Specify the styling and position of the panel that will appear when a
       # user hovers over a datapoint
       
       style <- paste0("position:absolute; z-index:100; background-color: rgba(245, 245, 245, 0.85); ",
-                      "left:", left_px - 200, "px; top:", top_px + 280, "px;")
+                      "left:", left_pixel - 200, "px; top:", top_pixel + 280, "px;")
       
       # Code what information to show on the the panel that will appear when a
       # user hovers over a datapoint
       
       wellPanel(
         style = style,
-        p(HTML(paste0("<b> Application Year: </b>", point$year2, "<br/>",
-                      "<b> Change in Wins: </b>", point$win_pct_diff, "%", "<br/>", 
-                      "<b> Change in Applications: </b>", point$applcn_pct_chng, "%")))
+        p(HTML(paste0("<b> Application Year: </b>", point_input$year2, "<br/>",
+                      "<b> Change in Wins: </b>", point_input$win_pct_diff, "%", "<br/>", 
+                      "<b> Change in Applications: </b>", point_input$applcn_pct_chng, "%")))
       )
       
     }) 
