@@ -130,19 +130,23 @@ server <- function(input, output) {
     
     # Create vectors assigning colors to each college's scatterpoint. I think
     # this makes the scatterplot more aesthetically pleasing. (Before I did this
-    # R assigned Oklahoma a sky blue point. That didn't seem right!)
+    # R assigned Oklahoma a sky blue point. That didn't seem right!) I assign
+    # colors most similar to each univerity's actual colors except in instances
+    # in which multiple universities have similar colors, in which case I assign
+    # random colors to some colleges. I use light colors so that they display
+    # well.
     
     conf_colors <-
       c(
         "ACC" = "lightskyblue",
         "Big 10" = "royalblue",
         "Big 12" = "red",
-        "Pac 12" = "lightsteelblue",
+        "Pac 12" = "gray",
         "SEC" = "gold"
       )
     acc_colors <-
       c(
-        "Clemson" = "darkorange",
+        "Clemson" = "orange",
         "Duke" = "blue",
         "Florida State" = "firebrick",
         "Georgia Tech" = "gold",
@@ -150,7 +154,7 @@ server <- function(input, output) {
         "North Carolina" = "deepskyblue",
         "North Carolina State" = "red",
         "Virginia" = "gray",
-        "Wake Forest" = "#9E7E38"
+        "Wake Forest" = "lightgoldenrodyellow"
       )
     big_10_colors <-
       c(
@@ -160,18 +164,18 @@ server <- function(input, output) {
         "Michigan" = "blue",
         "Michigan State" = "limegreen",
         "Minnesota" = "black",
-        "Northwestern" = "#ae34eb",
+        "Northwestern" = "purple",
         "Ohio State" = "firebrick",
-        "Penn State" = "deepskyblue",
-        "Purdue" = "#ceb888",
+        "Penn State" = "lightskyblue",
+        "Purdue" = "lightgoldenrodyellow",
         "Wisconsin" = "red"
       )
     big_12_colors <-
       c(
-        "Baylor" = "#32CD32",
-        "Iowa State" = "#F1BE48",
+        "Baylor" = "limegreen",
+        "Iowa State" = "gold",
         "Kansas" = "blue",
-        "Kansas State" = "#ae34eb",
+        "Kansas State" = "purple",
         "Oklahoma" = "firebrick",
         "Oklahoma State" = "black",
         "Texas" = "darkorange",
@@ -186,9 +190,9 @@ server <- function(input, output) {
         "Oregon State" = "darkorange",
         "Southern California" = "red",
         "Stanford" = "firebrick",
-        "UCLA" = "deepskyblue",
-        "Washington" = "#ae34eb",
-        "Washington State" = "#5E6A71"
+        "UCLA" = "lightskyblue",
+        "Washington" = "purple",
+        "Washington State" = "black"
       )
     sec_colors <-
       c(
@@ -198,12 +202,12 @@ server <- function(input, output) {
         "Florida" = "blue",
         "Georgia" = "red",
         "Kentucky" = "deepskyblue",
-        "LSU" = "#ae34eb",
+        "LSU" = "purple",
         "Mississippi" = "limegreen",
         "Mississippi State" = "Gray",
         "South Carolina" = "black",
         "Tennessee" = "orange",
-        "Vanderbilt" = "#866d4b"
+        "Vanderbilt" = "lightgoldenrodyellow"
       )
     
     # Code a scatterplot on the Conference Plot page according to the inputs
@@ -213,14 +217,14 @@ server <- function(input, output) {
     # geom_jitter to show points that otherwise would be hidden beneath others,
     # and I color points by conference (if the user selects "All") or college
     # name if the user chooses a particular conference. I assign college colors
-    # based on values specified in the vectors above. Finally, I plot a
-    # regression line to show the general relationship of the data.
+    # based on values specified in the vectors above. I set a dark background
+    # theme so that the datapoints stand out. Finally, I plot a regression line
+    # to show the general relationship of the data.
     
     output$plot <- renderPlot(
       ggplot(data_input(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
-        geom_point() +
         geom_jitter(aes_string(color = ifelse(input$conference == "All", "conference", "instnm"))) +
-        geom_smooth(method = 'lm') +
+        geom_smooth(method = 'lm', se = FALSE) +
         labs(
           title = paste("University Applications vs. Football Team Success:", input$conference),
           subtitle = "Change in Applications per Change in Football Team Ranking Over the Previous Year",
@@ -229,6 +233,7 @@ server <- function(input, output) {
           caption = "Showing data for Power 5 universities that did not change conferences between 2000 and 2012.\nFootball data at each datapoint corresponds to the season before the application year of that datapoint.",
           color = ifelse(input$conference == "All", "Conference", "College")
         ) +
+        theme_dark() +
         scale_color_manual(values = if (input$conference == "All") {
           conf_colors
         } else if (input$conference == "ACC") {
@@ -395,10 +400,13 @@ server <- function(input, output) {
       ggplot(rep_input(), aes(x = r_squared)) +
         geom_density() +
         geom_vline(data = quantile_input(), aes(xintercept= `50%`)) +
-        geom_vline(data = quantile_input(), aes(xintercept= `2.5%`), linetype = "dashed") +
-        geom_vline(data = quantile_input(), aes(xintercept= `97.5%`), linetype = "dashed") +
-        geom_vline(data = fit_input(), aes(xintercept = r_squared, color = "red")) +
+        geom_vline(data = quantile_input(), aes(xintercept= `2.5%`, color = "conf_color"), linetype = "dashed") +
+        geom_vline(data = quantile_input(), aes(xintercept= `97.5%`, color = "conf_color"), linetype = "dashed") +
+        geom_vline(data = fit_input(), aes(xintercept = r_squared, color = "r_color")) +
         guides(colour = FALSE) +
+        theme_dark() +
+        scale_color_manual(values = c("conf_color" = "lightblue",
+                                      "r_color" = "red")) +
         labs(
           title = expression(paste("R"^2, " estimate of Percent Change in Applications per Percent Change in Football Wins")),
           subtitle = paste("Density plot of 1000 bootstrapped samples:", input$college),
@@ -414,13 +422,15 @@ server <- function(input, output) {
     # percentage change in applications is plotted on the y axis. I use
     # geom_jitter to show points that otherwise would be hidden beneath others,
     # and I plot a regression line to show the general relationship of the data.
+    # I color each scatterpoint based on the colors used in the scatterplot on
+    # the "Conference Plot" page.
     
     output$scatter_plot <- renderPlot(
       ggplot(scatter_input(), aes(x = win_pct_diff, y = applcn_pct_chng)) +
-        geom_point() + 
-        geom_jitter(aes(color = conference)) +
-        geom_smooth(method='lm') +
+        geom_jitter(aes(color = input$college), na.rm = TRUE) +
+        geom_smooth(method='lm', se = FALSE) +
         guides(colour = FALSE) +
+        theme_dark() +
         labs(
           title = paste("University Applications vs. Football Team Success:", input$college),
           subtitle = "Change in Applications per Change in Football Team Ranking Over the Previous Year",
@@ -428,7 +438,18 @@ server <- function(input, output) {
           y = "Percent Change in Applications to University",
           caption = "Football data at each datapoint corresponds to the season before the application year of that datapoint",
           color = "Conference"
-        ) 
+        ) +
+        scale_color_manual(values = if (input$conf == "ACC") {
+          acc_colors
+        } else if (input$conf == "Big 10") {
+          big_10_colors
+        } else if (input$conf == "Big 12") {
+          big_12_colors
+        } else if (input$conf == "Pac 12") {
+          pac_12_colors
+        } else {
+          sec_colors
+        })
     )
     
     # Display a window with summary information whenever a user hovers over the
