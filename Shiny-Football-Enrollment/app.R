@@ -234,6 +234,7 @@ server <- function(input, output) {
           color = ifelse(input$conference == "All", "Conference", "College")
         ) +
         theme_dark() +
+        theme(plot.title = element_text(size = 16)) +
         scale_color_manual(values = if (input$conference == "All") {
           conf_colors
         } else if (input$conference == "ACC") {
@@ -405,10 +406,11 @@ server <- function(input, output) {
         geom_vline(data = fit_input(), aes(xintercept = r_squared, color = "r_color")) +
         guides(colour = FALSE) +
         theme_dark() +
+        theme(plot.title = element_text(size = 14)) +
         scale_color_manual(values = c("conf_color" = "lightblue",
                                       "r_color" = "red")) +
         labs(
-          title = expression(paste("R"^2, " estimate of Percent Change in Applications per Percent Change in Football Wins")),
+          title = expression(paste("R"^2, " estimate, Percent Change in Applications per Percent Change in Football Wins")),
           subtitle = paste("Density plot of 1000 bootstrapped samples:", input$college),
           x = bquote("R"^2),
           y = "Density",
@@ -431,6 +433,7 @@ server <- function(input, output) {
         geom_smooth(method='lm', se = FALSE) +
         guides(colour = FALSE) +
         theme_dark() +
+        theme(plot.title = element_text(size = 16)) +
         labs(
           title = paste("University Applications vs. Football Team Success:", input$college),
           subtitle = "Change in Applications per Change in Football Team Ranking Over the Previous Year",
