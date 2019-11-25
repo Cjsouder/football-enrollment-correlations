@@ -517,9 +517,19 @@ server <- function(input, output) {
             "To answer my question I decided to analyze university application data and football team records (wins vs losses) for a period of approximately 10 years. I looked only at Power 5 universities - that is, universities whose football teams are members of either the Big 10, Big 12, SEC, ACC, or Pac 12 athletic conferences. I reason that these schools recruit students nationally rather than regionally, so their student bodies are more likely to change based on the performance of their football teams than are the student bodies of smaller, regional colleges. I chose not to look at data for universities that changed athletic conferences during the time period of interest since that change could effect enrollment changes."
           ),
           br(),
-          h4("Reasoning Behind Choice of Models"),
-          div("Coming Soon!"),
+          h4("Modeling Decisions"),
+          div(
+            "There are two variables of interest in this model: percent change in football wins and percent change in college applications. Looking at percent change is more insightful than looking at raw changes in wins and applications. For example, it is a greater change to go from winning two games to four in a twelve-game season than it is to go from winning seven games to nine, and fans probably prefer large improvements to small ones. It is possible that the number of games won is more important than the change in the percentage won - perhaps when a college suddenly wins enough games to enter the AP list of top 25 programs or become eligible to play in a bowl game it causes a spike in applications - but that is an assumption for a different model."
+          ),
           br(),
+          div(
+            "Results are shown in a scatterplot since this type of graph allows the values of both variables to be displayed for many different data points. To plot each data point the change in applications for each year is matched with the change in football wins that occurred in the previous year. For example, a datapoint representing the change in applications between 2010 and 2011 will be matched with football data representing the change in wins from 2009 to 2010. The reasoning for modeling the data in this manner is that applicants apply before seeing the end of the current season and therefore rely on data from the previous season. Because both application and football seasons begin at roughly the end of August it is possible that applicants are influenced by more recent data when they make application decisions, but it is assumed that this is not the case. "
+          ),
+          br(),
+          div(
+            "A density plot of R-squared values is shown to provide context for how unusual each college's observed R-squared value may be. The plot uses 1000 bootstrapped samples taken from eleven years of observed data for each college. A necessary assumption is that eleven data points are not too few to bootstrap."
+          ),
+          br(), 
           h4("External Links"),
           div(
             "I gathered enrollment data from the",
@@ -561,11 +571,6 @@ server <- function(input, output) {
         br(),
         div(
           "The data becomes more interesting when analyzed by college. Some colleges seem to be affected by outliers - for example, Georgia Tech's r-squared estimate of percent change in enrollment per percent change in football wins appears to be roughly .125, a rather low value. However, a 95% confidence interval created from bootstrapping 1000 samples from the dataset contains r-squared values up to approximately r-squared = .625. Plotting a scatterplot of datapoints makes it evident that there is one point on the far left that is skewing results. Some universities have r-squared values that are relatively high. Purdue, for instance, has an r-squared value approximately equal to .45, while Washington State has a r-squared value of .625. Most universities, though, have low r-squared values and scatterplots with points that are fairly spread out. Some colleges, like Iowa State, have regression lines with negative slopes as a result."
-        ),
-        br(),
-        h4("Possible Problems with Setup"),
-        div(
-          "Many assumptions were made when setting up this model that may have influenced outcomes. When plotting datapoints for each application year the change in applications for that year was matched with the change in football wins that occured in the previous year. For example, a datapoint representing the change in applications between 2010 and 2011 would be matched with football data representing the change in wins from 2009 to 2010. The reasoning for modeling the data in this manner was that applicants would apply before seeing results of the current season. However, both application and football seasons begin at roughly the end of August, so it is possible that applicants were influenced by more recent data when making application decisions. Also, perhaps the change in football wins is not a valid measure of the quality of a football team. Maybe there is a higher correlation between college applications and football teams entering or moving up in the AP list of top 25 programs."
         )
       ))
     })
