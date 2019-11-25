@@ -509,9 +509,6 @@ server <- function(input, output) {
         paste(
           h2("About This Project"),
           br(),
-          embed_url("https://youtu.be/xRL7frHdY3A"),
-          br(),
-          br(),
           div(
             "This project began after an informal observation of enrollment changes at Kansas State University (K-State), the local university in my hometown. Between 2010 and 2012 K-State's football team had phenomenal success - the team was ranked #1 in the nation for a time. During this same time period the university experienced record student enrollment rates. Meanwhile, K-State's in-state rival, the University of Kansas (KU), experienced some of the worst football seasons in university history during this timeframe. The university also suffered declining enrollment. Only a few years later, though, KSU began experiencing declining enrollment as its football team regressed. This made me wonder: do most large universities experience surges in enrollment when their football teams perform well and declines in enrollment when their teams struggle?"
           ),
@@ -553,6 +550,9 @@ server <- function(input, output) {
     output$summary <- renderUI({
       HTML(paste(
         h2("Takeaways from This Project"),
+        br(),
+        embed_youtube("BXHvPfoBiuI"),
+        br(),
         br(),
         h4("Correlations Seem Weak"),
         div(
