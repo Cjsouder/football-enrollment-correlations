@@ -571,6 +571,12 @@ server <- function(input, output) {
         br(),
         div(
           "The data becomes more interesting when analyzed by college. Some colleges seem to be affected by outliers - for example, Georgia Tech's r-squared estimate of percent change in enrollment per percent change in football wins appears to be roughly 0.125, a rather low value. However, a 95% confidence interval created from bootstrapping 1000 samples from the dataset contains r-squared values up to approximately r-squared = 0.625. Plotting a scatterplot of datapoints makes it evident that there is one point on the far left that is skewing results. Some universities have r-squared values that are relatively high. Purdue, for instance, has an r-squared value approximately equal to 0.45, while Washington State has a r-squared value of 0.625. An overwhelming majority of universities, though, have low r-squared values and scatterplots with points that are fairly spread out. Some colleges, like Iowa State, have regression lines with negative slopes as a result."
+        ),
+        br(),
+        div(
+          "Perhaps change in wins is not the primary football statistic applicants use when deciding where to send their applications. Scholars have identified a trend called the ",
+          a("Flutie Effect,", href = "https://hbswk.hbs.edu/item/diagnosing-the-flutie-effect-on-college-marketing"),
+          " named after Boston College quarterback Doug Flutie's dramatic game-winning touchdown pass and the resulting surge in applications it brought, in which memorable moments in sports games lead to a spike in applications to colleges. It could be that beating rival schools or winning prestigious bowl games are more statistically significant factors in determining the change in applications to colleges."
         )
       ))
     })
